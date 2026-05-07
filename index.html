@@ -490,17 +490,17 @@
         .print-table th {
             background: #7c3aed;
             color: white;
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 0.7rem;
             text-align: left;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .print-table th:last-child { text-align: right; }
 
         .print-table td {
-            padding: 0.7rem 1rem;
+            padding: 0.45rem 0.7rem;
             border-bottom: 1px solid #e5e7eb;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         .print-table td:last-child { text-align: right; font-weight: 700; color: #7c3aed; }
@@ -741,12 +741,13 @@
             * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             body { background: white !important; margin: 0; padding: 0; }
             #menu-page, .footer, .hero-banner, .cart-fab, .cart-modal { display: none !important; }
-            .print-view {
-                display: block !important;
-                position: static !important;
-                overflow: visible !important;
-                padding: 0.8rem 1rem !important;
-            }
+            #pickupView {
+				display: block !important;
+				position: static !important;
+				overflow: visible !important;
+				padding: 0.8rem 1rem !important;
+			}
+			#printView { display: none !important; }
             @page { margin: 0.6cm; size: A4 portrait; }
             .print-header { margin-bottom: 0.7rem; }
             .print-header h1 { font-size: 1.2rem; margin-bottom: 0.1rem; }
@@ -815,27 +816,27 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Idly + Cauliflower/Mushroom Curry Combo</div>
+                        <div class="item-name">Idly + Cauliflower Curry Combo</div>
                         <div class="item-description">3 soft idlies + vegetable curry + chutney</div>
                         <div class="item-size">Soft idlies with fresh vegetables in creamy spiced gravy</div>
                         <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
                     </div>
                     <div class="item-price">$14</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Idly + Cauliflower/Mushroom Curry Combo" data-price="14" data-chutney="full"></div></div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly + Cauliflower Curry Combo" data-price="14" data-chutney="full"></div></div>
             </div>
-
-            <div class="menu-item">
+			
+			<div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Ven Pongal</div>
-                        <div class="item-description">Rice and lentils cooked tempered with ghee, ginger, jeera and peppercorns</div>
-                        <div class="item-size">12oz | Served with sambhar and chutney</div>
-                        <div class="item-options">Choose one chutney variety (Coconut or Peanut)</div>
+                        <div class="item-name">Idly + Mushroom Curry Combo</div>
+                        <div class="item-description">3 soft idlies + vegetable curry + chutney</div>
+                        <div class="item-size">Soft idlies with fresh vegetables in creamy spiced gravy</div>
+                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
                     </div>
-                    <div class="item-price">$15</div>
+                    <div class="item-price">$14</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Upma Combo" data-price="14" data-chutney="limited"></div></div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly + Mushroom Curry Combo" data-price="14" data-chutney="full"></div></div>
             </div>
 
             <div class="menu-item">
@@ -974,14 +975,15 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Cauliflower/Mushroom Curry</div>
+                        <div class="item-name">Mushroom Curry</div>
                         <div class="item-description">Spiced madras style gravy with coconut paste</div>
-                        <div class="item-size">12oz | Choose cauliflower or mushroom</div>
+                        <div class="item-size">12oz</div>
                     </div>
                     <div class="item-price">$15</div>
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Cauliflower/Mushroom Curry" data-price="15"></div></div>
             </div>
+
 
             <div class="menu-item">
                 <div class="item-header">
@@ -1282,7 +1284,7 @@
                         <div class="item-name">Coconut Chutney</div>
                         <div class="item-description">Coconut, lentils, green chillies, ginger, garlic</div>
                     </div>
-                    <div class="item-price">$8</div>
+                    <div class="item-price">$7</div>
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Coconut Chutney" data-price="7"></div></div>
             </div>
@@ -1479,9 +1481,10 @@
                 <div class="cart-note">
                     📸 Click below to see your order summary — then take a screenshot and send it to place your order!
                 </div>
-                <button class="screenshot-btn" onclick="openPrintView()">
-                    📋 View Order Summary
-                </button>
+                <!-- NEW -->
+				<button class="screenshot-btn no-print" onclick="openUserDetailsView()">
+					📋 Continue to User Details
+				</button>
                 <button class="clear-btn" onclick="clearCart()">🗑 Clear Cart</button>
             </div>
         </div>
@@ -1490,49 +1493,14 @@
     <!-- PRINT / SCREENSHOT VIEW -->
     <div class="print-view" id="printView">
         <div class="print-actions no-print">
-            <button class="btn-back" onclick="closePrintView()">← Back to Cart</button>
-            <button class="btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
-        </div>
+			<button class="btn-back" onclick="closeOrderSummaryView()">← Back to User Details</button>
+			<button class="btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
+		</div>
         <div class="print-instructions no-print">
             📱 <strong>To order:</strong> Fill in the details and click on "Print / Save PDF". Send the PDF to Ooru Masala Home via WhatsApp or Facebook Messenger DM. Remember to include your preferred pickup date (minimum 2 days notice)!
         </div>
 
-        <!-- Pickup details form (visible on screen, hidden on print) -->
-        <div class="name-input-row no-print" id="pickupDetailsForm">
-            <div style="margin-bottom:1rem;">
-                <label class="name-label">👤 Full Name <span style="color:#dc2626;">*</span></label>
-                <input type="text" id="pickupName" class="name-input"
-                    placeholder="e.g. Priya Sharma"
-                    autocomplete="name"
-                    oninput="updatePickupDetails()" />
-                <div class="pickup-error-msg" id="nameErr">⚠️ Please enter your name.</div>
-            </div>
-            <div style="margin-bottom:1rem;">
-                <label class="name-label">📞 Contact Number <span style="color:#dc2626;">*</span></label>
-                <input type="tel" id="pickupPhone" class="name-input"
-                    placeholder="e.g. 604-555-1234"
-                    autocomplete="tel"
-                    oninput="updatePickupDetails()" />
-                <div class="pickup-error-msg" id="phoneErr">⚠️ Please enter your contact number.</div>
-            </div>
-            <div style="margin-bottom:1rem;">
-                <label class="name-label">📅 Pickup Date <span style="color:#dc2626;">*</span></label>
-                <input type="date" id="pickupDate" class="name-input"
-                    onchange="updatePickupDetails()" />
-                <div class="pickup-error-msg" id="dateErr">⚠️ Please select a pickup date (minimum 2 days from today).</div>
-            </div>
-            <div>
-                <label class="name-label">🕓 Pickup Time <span style="color:#dc2626;">*</span></label>
-                <select id="pickupTime" class="name-input" onchange="updatePickupDetails()" style="cursor:pointer;">
-                    <option value="">— Select a time slot —</option>
-                    <option value="4:00 PM">4:00 PM</option>
-                    <option value="5:00 PM">5:00 PM</option>
-                    <option value="6:00 PM">6:00 PM</option>
-                    <option value="7:00 PM">7:00 PM</option>
-                </select>
-                <div class="pickup-error-msg" id="timeErr">⚠️ Please select a pickup time.</div>
-            </div>
-        </div>
+        
 
         <div class="print-header">
             <h1>🍲 Ooru Masala Home</h1>
@@ -1541,7 +1509,7 @@
         </div>
 
         <!-- Customer & pickup summary box (shown in both screen and print) -->
-        <div id="pickupSummaryBox" style="display:none; background:#faf5ff; border:2px solid #e9d5ff; border-radius:12px; padding:1rem 1.3rem; margin-bottom:1.5rem;">
+        <div id="pickupSummaryBox" style="display:block; background:#faf5ff; border:2px solid #e9d5ff; border-radius:12px; padding:1rem 1.3rem; margin-bottom:1.5rem;">
             <div style="font-weight:800; color:#7c3aed; font-size:1rem; margin-bottom:0.6rem;">📋 Order Details</div>
             <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
                 <tr>
@@ -1585,6 +1553,93 @@
             <p style="margin-top:0.4rem; color:#999;">Prices in CAD · Menu updated May 2026</p>
         </div>
     </div>
+	
+	<div class="print-view" id="pickupView">
+    <div class="print-actions no-print">
+        <button class="btn-back" onclick="closeUserDetailsView()">← Back to Cart</button>
+        <button class="btn-print" onclick="openOrderSummaryView()">Continue →</button>
+    </div>
+    <div class="print-instructions no-print">
+        📱 <strong>To order:</strong> Fill in your details and click "Continue". 
+    </div>
+
+    <div class="name-input-row no-print" id="pickupDetailsForm">
+        <div style="margin-bottom:1rem;">
+                <label class="name-label">👤 Full Name <span style="color:#dc2626;">*</span></label>
+                <input type="text" id="pickupName" class="name-input"
+                    placeholder="e.g. Priya Sharma"
+                    autocomplete="name"
+                    oninput="updatePickupDetails()" />
+                <div class="pickup-error-msg" id="nameErr">⚠️ Please enter your name.</div>
+            </div>
+            <div style="margin-bottom:1rem;">
+                <label class="name-label">📞 Contact Number <span style="color:#dc2626;">*</span></label>
+                <input type="tel" id="pickupPhone" class="name-input"
+                    placeholder="e.g. 604-555-1234"
+                    autocomplete="tel"
+                    oninput="updatePickupDetails()" />
+                <div class="pickup-error-msg" id="phoneErr">⚠️ Please enter your contact number.</div>
+            </div>
+            <div style="margin-bottom:1rem;">
+                <label class="name-label">📅 Pickup Date <span style="color:#dc2626;">*</span></label>
+                <input type="date" id="pickupDate" class="name-input"
+                    onchange="updatePickupDetails()" />
+                <div class="pickup-error-msg" id="dateErr">⚠️ Please select a pickup date (minimum 2 days from today).</div>
+            </div>
+            <div>
+                <label class="name-label">🕓 Pickup Time <span style="color:#dc2626;">*</span></label>
+                <select id="pickupTime" class="name-input" onchange="updatePickupDetails()" style="cursor:pointer;">
+                    <option value="">— Select a time slot —</option>
+                    <option value="4:00 PM">4:00 PM</option>
+                    <option value="5:00 PM">5:00 PM</option>
+                    <option value="6:00 PM">6:00 PM</option>
+                    <option value="7:00 PM">7:00 PM</option>
+                </select>
+                <div class="pickup-error-msg" id="timeErr">⚠️ Please select a pickup time.</div>
+        </div>
+    </div>
+
+</div>
+	
+	<!-- PICKUP DETAILS VIEW -->
+<div class="print-view" id="pickupView">
+    <div class="print-actions no-print">
+        <button class="btn-back" onclick="closeOrderSummaryView()">← Back</button>
+        <button class="btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
+    </div>
+    <div class="print-instructions no-print">
+        📱 <strong>To order:</strong> Fill in your details and click "Print / Save PDF". Send the PDF via WhatsApp or Facebook Messenger.
+    </div>
+
+    
+
+    <div class="print-header">
+        <h1>🍲 Ooru Masala Home</h1>
+        <p>Authentic South Indian Cuisine · Pickup near Lonsdale Quay, North Vancouver</p>
+        <p class="print-date" id="printDate2"></p>
+    </div>
+
+    <div id="pickupSummaryBox2" style="display:none; background:#faf5ff; border:2px solid #e9d5ff; border-radius:12px; padding:1rem 1.3rem; margin-bottom:1.5rem;">
+        <div style="font-weight:800; color:#7c3aed; font-size:1rem; margin-bottom:0.6rem;">📋 Order Details</div>
+        <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+            <tr><td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666; width:38%;">👤 Name</td><td style="padding:0.3rem 0; font-weight:700;" id="summaryName2">—</td></tr>
+            <tr><td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666;">📞 Contact</td><td style="padding:0.3rem 0; font-weight:700;" id="summaryPhone2">—</td></tr>
+            <tr><td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666;">📅 Pickup Date</td><td style="padding:0.3rem 0; font-weight:700;" id="summaryDate2">—</td></tr>
+            <tr><td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666;">🕓 Pickup Time</td><td style="padding:0.3rem 0; font-weight:700;" id="summaryTime2">—</td></tr>
+        </table>
+    </div>
+
+    <!-- Repeat the print table here for the PDF -->
+    <table class="print-table">
+        <thead><tr><th>Item</th><th style="text-align:center;">Qty</th><th style="text-align:right;">Price</th><th style="text-align:right;">Subtotal</th></tr></thead>
+        <tbody id="printTableBody2"></tbody>
+        <tfoot><tr class="print-total-row"><td colspan="3">Order Total</td><td id="printTotal2"></td></tr></tfoot>
+    </table>
+    <div class="print-footer">
+        <p><strong>Pre-orders only · Minimum 2 days notice required</strong></p>
+        <p style="margin-top:0.4rem; color:#999;">Prices in CAD · Menu updated May 2026</p>
+    </div>
+</div>
 
     <script>
         // ── Chutney options per type ────────────────────────────
@@ -1755,131 +1810,177 @@
             const box = document.getElementById('pickupSummaryBox');
             if (name || phone || date || time) {
                 box.style.display = 'block';
-                document.getElementById('summaryName').textContent  = name  || '—';
-                document.getElementById('summaryPhone').textContent = phone || '—';
+                document.getElementById('summaryName2').textContent  = name  || '—';
+                document.getElementById('summaryPhone2').textContent = phone || '—';
                 if (date) {
                     const d = new Date(date + 'T00:00:00');
-                    document.getElementById('summaryDate').textContent =
+                    document.getElementById('summaryDate2').textContent =
                         d.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
                 } else {
-                    document.getElementById('summaryDate').textContent = '—';
+                    document.getElementById('summaryDate2').textContent = '—';
                 }
-                document.getElementById('summaryTime').textContent = time || '—';
-            } else {
-                box.style.display = 'none';
-            }
-        }
+                document.getElementById('summaryTime2').textContent = time || '—';
+            } 
+        }        
+		
+		function openPickupView() {
+			// Copy order data to the pickup view's table
+			document.getElementById('printTableBody2').innerHTML =
+				document.getElementById('printTableBody').innerHTML;
+			document.getElementById('printTotal2').textContent =
+				document.getElementById('printTotal').textContent;
+			document.getElementById('printDate2').textContent =
+				document.getElementById('printDate').textContent;
 
-        // ── Print view with chutney + pickup validation ──────────
-        function openPrintView() {
-            const items = Object.entries(cart);
-            if (items.length === 0) return;
+			// Reset form
+			document.getElementById('pickupName').value  = '';
+			document.getElementById('pickupPhone').value = '';
+			document.getElementById('pickupDate').value  = '';
+			document.getElementById('pickupTime').value  = '';
+			document.getElementById('pickupSummaryBox2').style.display = 'none';
+			['nameErr','phoneErr','dateErr','timeErr'].forEach(id =>
+				document.getElementById(id).classList.remove('visible'));
+			['pickupName','pickupPhone','pickupDate','pickupTime'].forEach(id =>
+				document.getElementById(id).classList.remove('field-error'));
 
-            // Validate: every chutney item must have a selection
-            let hasError = false;
-            items.forEach(([name, { chutney }]) => {
-                if (chutneyMap[name] && !chutney) {
-                    hasError = true;
-                    const err = document.getElementById(`chutney_err_${CSS.escape(name)}`);
-                    const sel = document.getElementById(`chutney_sel_${CSS.escape(name)}`);
-                    if (err) err.classList.add('visible');
-                    if (sel) sel.classList.add('error');
-                }
-            });
-            if (hasError) {
-                const firstErr = document.querySelector('.chutney-select.error');
-                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                return;
-            }
+			// Set minimum date
+			const minDate = new Date();
+			minDate.setDate(minDate.getDate() + 2);
+			document.getElementById('pickupDate').min = minDate.toISOString().split('T')[0];
 
-            // Build print table
-            const now = new Date();
-            document.getElementById('printDate').textContent =
-                'Order placed: ' + now.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+			document.getElementById('printView').classList.remove('open');
+			document.getElementById('pickupView').classList.add('open');
+			document.getElementById('pickupView').scrollTop = 0;
+			setTimeout(() => document.getElementById('pickupName').focus(), 300);
+		}
 
-            // Reset pickup form
-            document.getElementById('pickupName').value  = '';
-            document.getElementById('pickupPhone').value = '';
-            document.getElementById('pickupDate').value  = '';
-            document.getElementById('pickupTime').value  = '';
-            document.getElementById('pickupSummaryBox').style.display = 'none';
-            ['nameErr','phoneErr','dateErr','timeErr'].forEach(id => {
-                document.getElementById(id).classList.remove('visible');
-            });
-            ['pickupName','pickupPhone','pickupDate','pickupTime'].forEach(id => {
-                document.getElementById(id).classList.remove('field-error');
-            });
+		function closePickupView() {
+			document.getElementById('pickupView').classList.remove('open');
+			document.getElementById('printView').classList.add('open');
+			document.getElementById('printView').scrollTop = 0;
+		}
+		
+	function openUserDetailsView() {
+		// Validate chutneys first
+		let hasError = false;
+		Object.entries(cart).forEach(([name, { chutney }]) => {
+			if (chutneyMap[name] && !chutney) {
+				hasError = true;
+				const err = document.getElementById(`chutney_err_${CSS.escape(name)}`);
+				const sel = document.getElementById(`chutney_sel_${CSS.escape(name)}`);
+				if (err) err.classList.add('visible');
+				if (sel) sel.classList.add('error');
+			}
+		});
+		if (hasError) {
+			document.querySelector('.chutney-select.error')
+				?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			return;
+		}
 
-            // Set minimum date (2 days from today)
-            const minDate = new Date();
-            minDate.setDate(minDate.getDate() + 2);
-            document.getElementById('pickupDate').min = minDate.toISOString().split('T')[0];
+		// Reset form
+		document.getElementById('pickupName').value  = '';
+		document.getElementById('pickupPhone').value = '';
+		document.getElementById('pickupDate').value  = '';
+		document.getElementById('pickupTime').value  = '';
+		document.getElementById('pickupSummaryBox').style.display = 'none';
+		['nameErr','phoneErr','dateErr','timeErr'].forEach(id =>
+			document.getElementById(id).classList.remove('visible'));
+		['pickupName','pickupPhone','pickupDate','pickupTime'].forEach(id =>
+			document.getElementById(id).classList.remove('field-error'));
 
-            let total = 0;
-            let rows  = '';
-            items.forEach(([name, { qty, price, chutney }]) => {
-                const sub    = qty * price;
-                total       += sub;
-                const detail = chutney
-                    ? `<br><span style="font-size:0.82rem;color:#7c3aed;font-style:italic;">🌿 ${chutney} Chutney</span>`
-                    : '';
-                rows += `<tr>
-                    <td>${name}${detail}</td>
-                    <td style="text-align:center;">${qty}</td>
-                    <td style="text-align:right;">$${price % 1 === 0 ? price : price.toFixed(2)}</td>
-                    <td>$${sub % 1 === 0 ? sub : sub.toFixed(2)}</td>
-                </tr>`;
-            });
-            document.getElementById('printTableBody').innerHTML = rows;
-            document.getElementById('printTotal').textContent =
-                '$' + (total % 1 === 0 ? total : total.toFixed(2));
+		const minDate = new Date();
+		minDate.setDate(minDate.getDate() + 2);
+		document.getElementById('pickupDate').min = minDate.toISOString().split('T')[0];
 
-            closeCart();
-            document.getElementById('printView').classList.add('open');
-            document.body.style.overflow = 'hidden';
+		closeCart();
+		document.getElementById('pickupView').classList.add('open');
+		document.getElementById('pickupView').scrollTop = 0;
+		setTimeout(() => document.getElementById('pickupName').focus(), 300);
+	}
+	function closeUserDetailsView() {
+		document.getElementById('pickupView').classList.remove('open');
+		document.body.style.overflow = '';
+		openCart();
+	}
+	function openOrderSummaryView() {
+		const name  = document.getElementById('pickupName').value.trim();
+		const phone = document.getElementById('pickupPhone').value.trim();
+		const date  = document.getElementById('pickupDate').value;
+		const time  = document.getElementById('pickupTime').value;
+		const minDate = new Date();
+		minDate.setDate(minDate.getDate() + 2);
+		const selectedDate = date ? new Date(date + 'T00:00:00') : null;
 
-            setTimeout(() => document.getElementById('pickupName').focus(), 300);
-        }
+		let valid = true;
+		function setErr(fieldId, errId, show) {
+			document.getElementById(errId).classList.toggle('visible', show);
+			document.getElementById(fieldId).classList.toggle('field-error', show);
+			if (show) valid = false;
+		}
+		setErr('pickupName',  'nameErr',  !name);
+		setErr('pickupPhone', 'phoneErr', !phone);
+		setErr('pickupDate',  'dateErr',  !date || selectedDate < minDate);
+		setErr('pickupTime',  'timeErr',  !time);
 
-        function closePrintView() {
-            document.getElementById('printView').classList.remove('open');
-            document.body.style.overflow = '';
-            openCart();
-        }
+		if (!valid) {
+			document.getElementById('pickupDetailsForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+			return;
+		}
 
-        // ── Validate pickup details before print/save ────────────
-        (function patchPrintButton() {
-            // Override window.print to validate first
-            const origPrint = window.print.bind(window);
-            document.querySelector('.btn-print').onclick = function() {
-                const name  = document.getElementById('pickupName').value.trim();
-                const phone = document.getElementById('pickupPhone').value.trim();
-                const date  = document.getElementById('pickupDate').value;
-                const time  = document.getElementById('pickupTime').value;
-                const minDate = new Date();
-                minDate.setDate(minDate.getDate() + 2);
-                const selectedDate = date ? new Date(date + 'T00:00:00') : null;
+		// Populate summary box
+		document.getElementById('summaryName').textContent  = name;
+		document.getElementById('summaryPhone').textContent = phone;
+		const d = new Date(date + 'T00:00:00');
+		document.getElementById('summaryDate').textContent =
+			d.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+		document.getElementById('summaryTime').textContent = time;
+		document.getElementById('pickupSummaryBox').style.display = 'block';
 
-                let valid = true;
+		// Populate order table
+		const now = new Date();
+		document.getElementById('printDate').textContent =
+			'Order placed: ' + now.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
 
-                function setErr(fieldId, errId, show) {
-                    document.getElementById(errId).classList.toggle('visible', show);
-                    document.getElementById(fieldId).classList.toggle('field-error', show);
-                    if (show) valid = false;
-                }
+		let total = 0, rows = '';
+		Object.entries(cart).forEach(([itemName, { qty, price, chutney }]) => {
+			const sub = qty * price;
+			total += sub;
+			const detail = chutney
+				? `<br><span style="font-size:0.82rem;color:#7c3aed;font-style:italic;">🌿 ${chutney} Chutney</span>`
+				: '';
+			rows += `<tr>
+				<td>${itemName}${detail}</td>
+				<td style="text-align:center;">${qty}</td>
+				<td style="text-align:right;">$${price % 1 === 0 ? price : price.toFixed(2)}</td>
+				<td>$${sub % 1 === 0 ? sub : sub.toFixed(2)}</td>
+			</tr>`;
+		});
+		// Mirror to pickupView (used for printing)
+		document.getElementById('printTableBody2').innerHTML = rows;
+		document.getElementById('printTotal2').textContent =
+			'$' + (total % 1 === 0 ? total : total.toFixed(2));
+		document.getElementById('printDate2').textContent =
+			document.getElementById('printDate').textContent;
+		document.getElementById('summaryName2').textContent  = name;
+		document.getElementById('summaryPhone2').textContent = phone;
+		document.getElementById('summaryDate2').textContent  = document.getElementById('summaryDate').textContent;
+		document.getElementById('summaryTime2').textContent  = time;
+		document.getElementById('pickupSummaryBox2').style.display = 'block';
+		
+		document.getElementById('printTableBody').innerHTML = rows;
+		document.getElementById('printTotal').textContent =
+			'$' + (total % 1 === 0 ? total : total.toFixed(2));
 
-                setErr('pickupName',  'nameErr',  !name);
-                setErr('pickupPhone', 'phoneErr', !phone);
-                setErr('pickupDate',  'dateErr',  !date || selectedDate < minDate);
-                setErr('pickupTime',  'timeErr',  !time);
-
-                if (!valid) {
-                    document.getElementById('pickupDetailsForm').scrollIntoView({ behavior:'smooth', block:'start' });
-                    return;
-                }
-                origPrint();
-            };
-        })();
+		document.getElementById('pickupView').classList.remove('open');
+		document.getElementById('printView').classList.add('open');
+		document.getElementById('printView').scrollTop = 0;
+	}
+	function closeOrderSummaryView() {
+		document.getElementById('printView').classList.remove('open');
+		document.getElementById('pickupView').classList.add('open');
+		document.getElementById('pickupView').scrollTop = 0;
+	}
     </script>
 </body>
 </html>
