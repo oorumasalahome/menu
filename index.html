@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ooru Masala Home - South Indian Takeaway</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f3ff 0%, #f0f9ff 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* HERO BANNER — mobile-first stacked layout */
+        .hero-banner {
+            width: 100%;
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* On wider screens banner scales naturally */
+        @media (min-width: 768px) {
+            .hero-banner img { max-height: 320px; object-fit: cover; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            padding-bottom: 100px;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e9d5ff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            border-left: 4px solid #8b5cf6;
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(139,92,246,0.15);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1a1a1a;
+        }
+
+        .item-price {
+            background: #8b5cf6;
+            color: white;
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 0.3rem;
+        }
+
+        .item-size {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        .item-options {
+            color: #8b5cf6;
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            font-weight: 500;
+        }
+
+        /* CART CONTROLS */
+        .item-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 0.8rem;
+            gap: 0.5rem;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 2px solid #8b5cf6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            width: 34px;
+            height: 34px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .qty-btn:hover {
+            background: #7c3aed;
+        }
+
+        .qty-display {
+            min-width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #8b5cf6;
+            background: white;
+        }
+
+        .add-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 0.45rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+        }
+
+        .add-btn:hover {
+            background: #7c3aed;
+            transform: scale(1.04);
+        }
+
+        /* STICKY CART BUTTON */
+        .cart-fab {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 999px;
+            padding: 0.9rem 1.6rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(124,58,237,0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            z-index: 999;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .cart-fab:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 28px rgba(124,58,237,0.5);
+        }
+
+        .cart-fab .cart-count {
+            background: #f59e0b;
+            color: #1a1a1a;
+            border-radius: 999px;
+            padding: 0.1rem 0.55rem;
+            font-size: 0.85rem;
+            font-weight: 800;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        .cart-fab.hidden {
+            display: none;
+        }
+
+        /* CART MODAL OVERLAY */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .cart-modal.open {
+            display: flex;
+        }
+
+        .cart-panel {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            border-radius: 24px 24px 0 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .cart-header {
+            padding: 1.4rem 1.5rem 1rem;
+            border-bottom: 2px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .cart-header h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        .close-btn {
+            background: #f3f4f6;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: background 0.15s;
+        }
+
+        .close-btn:hover { background: #e5e7eb; }
+
+        .cart-items {
+            overflow-y: auto;
+            flex: 1;
+            padding: 1rem 1.5rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #999;
+            padding: 2rem;
+            font-size: 1rem;
+        }
+
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            gap: 0.5rem;
+        }
+
+        .cart-item-row:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            flex: 1;
+            color: #1a1a1a;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cart-qty-btn {
+            background: #f9fafb;
+            border: none;
+            width: 28px;
+            height: 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-qty-btn:hover { background: #f3f4f6; }
+
+        .cart-qty-num {
+            width: 30px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1a1a1a;
+            background: white;
+        }
+
+        .cart-item-subtotal {
+            font-weight: 700;
+            color: #8b5cf6;
+            font-size: 0.95rem;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .cart-footer {
+            padding: 1rem 1.5rem 1.5rem;
+            border-top: 2px solid #f3f4f6;
+            flex-shrink: 0;
+            background: white;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .cart-total-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .cart-total-amount {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #7c3aed;
+        }
+
+        .cart-note {
+            background: #fef3c7;
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            font-size: 0.85rem;
+            color: #92400e;
+            margin-bottom: 1rem;
+        }
+
+        .screenshot-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #7c3aed, #9333ea);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .screenshot-btn:hover {
+            opacity: 0.92;
+            transform: scale(1.01);
+        }
+
+        .clear-btn {
+            width: 100%;
+            background: transparent;
+            color: #dc2626;
+            border: 1.5px solid #fecaca;
+            padding: 0.65rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.6rem;
+            transition: background 0.15s;
+        }
+
+        .clear-btn:hover { background: #fff1f1; }
+
+        /* PRINT / SCREENSHOT VIEW */
+        .print-view {
+            display: none;
+            background: white;
+            z-index: 2000;
+            padding: 2rem;
+        }
+
+        .print-view.open {
+            display: block;
+            position: fixed;
+            inset: 0;
+            overflow-y: auto;
+        }
+
+        .print-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .print-header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.3rem;
+        }
+
+        .print-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .print-date {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .print-table th {
+            background: #7c3aed;
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .print-table th:last-child { text-align: right; }
+
+        .print-table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.95rem;
+        }
+
+        .print-table td:last-child { text-align: right; font-weight: 700; color: #7c3aed; }
+
+        .print-table tr:nth-child(even) td { background: #faf5ff; }
+
+        .print-total-row td {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            border-top: 3px solid #7c3aed;
+            border-bottom: none;
+        }
+
+        .print-total-row td:last-child { color: #7c3aed; font-size: 1.3rem; }
+
+        .print-footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.88rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .print-instructions {
+            background: #fef3c7;
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.88rem;
+            color: #92400e;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .print-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .print-actions button {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.15s;
+        }
+
+        .print-actions button:hover { opacity: 0.88; }
+
+        .btn-back {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #7c3aed, #9333ea);
+            color: white;
+        }
+
+        .spice-notice {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .allergen-warning {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #7f1d1d;
+        }
+
+        .footer {
+            background: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 2rem;
+        }
+
+        .footer p { margin-bottom: 0.5rem; }
+
+        .small-text {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+
+            .item-header { flex-direction: column; gap: 0.5rem; }
+            .item-price { align-self: flex-start; }
+            .container { padding: 1rem; }
+            .cart-panel { max-height: 95vh; border-radius: 20px 20px 0 0; }
+        }
+
+        .name-input-row {
+            background: #faf5ff;
+            border: 2px solid #e9d5ff;
+            border-radius: 12px;
+            padding: 0.9rem 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .name-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 0.4rem;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 0.55rem 0.8rem;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1a1a1a;
+            background: white;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .pickup-error-msg {
+            font-size: 0.78rem;
+            color: #dc2626;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        .pickup-error-msg.visible { display: block; }
+        .name-input.field-error {
+            border-color: #dc2626 !important;
+            background: #fff5f5 !important;
+        }
+
+        /* CHUTNEY DROPDOWN in cart */
+        .chutney-row {
+            margin-top: 0.5rem;
+            padding: 0.6rem 0.8rem;
+            background: #faf5ff;
+            border-radius: 8px;
+            border: 1px solid #e9d5ff;
+        }
+
+        .chutney-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #7c3aed;
+            margin-bottom: 0.3rem;
+        }
+
+        .chutney-select {
+            width: 100%;
+            padding: 0.4rem 0.6rem;
+            border: 1.5px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            color: #1a1a1a;
+            background: white;
+            cursor: pointer;
+            appearance: auto;
+        }
+
+        .chutney-select:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .chutney-select.error {
+            border-color: #dc2626;
+            background: #fff5f5;
+        }
+
+        .chutney-error-msg {
+            font-size: 0.78rem;
+            color: #dc2626;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .chutney-error-msg.visible { display: block; }
+
+        /* Customer name field in cart */
+        .customer-name-row {
+            padding: 0.8rem 1.5rem 0;
+        }
+        .customer-name-row label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.3rem;
+        }
+        .customer-name-row input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+        }
+        .customer-name-row input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+        .customer-name-row input.error {
+            border-color: #dc2626;
+            background: #fff5f5;
+        }
+        .name-error-msg {
+            font-size: 0.78rem;
+            color: #dc2626;
+            margin-top: 0.25rem;
+            display: none;
+            padding: 0 1.5rem;
+        }
+        .name-error-msg.visible { display: block; }
+
+        @media print {
+            .no-print { display: none !important; }
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            body { background: white !important; margin: 0; padding: 0; }
+            #menu-page, .footer, .hero-banner, .cart-fab, .cart-modal { display: none !important; }
+            .print-view {
+                display: block !important;
+                position: static !important;
+                overflow: visible !important;
+                padding: 0.8rem 1rem !important;
+            }
+            @page { margin: 0.6cm; size: A4 portrait; }
+            .print-header { margin-bottom: 0.7rem; }
+            .print-header h1 { font-size: 1.2rem; margin-bottom: 0.1rem; }
+            .print-header p, .print-date { font-size: 0.75rem; margin: 0; }
+            .print-instructions { display: none; }
+            .print-table { font-size: 0.82rem; margin-bottom: 0.8rem; }
+            .print-table th { padding: 0.35rem 0.6rem; }
+            .print-table td { padding: 0.35rem 0.6rem; }
+            .print-footer { font-size: 0.75rem; margin-top: 0.6rem; padding-top: 0.4rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO BANNER — mobile-first stacked -->
+    <div class="hero-banner">
+        <img src="./banner.png" alt="Ooru Masala Home — Authentic South Indian Cuisine" />
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container" id="menu-page">
+
+        <div class="spice-notice">
+            🌶️ Default spice level is <strong>MEDIUM</strong>.
+            Please let us know if you need mild or spicier versions.
+        </div>
+
+        <div class="allergen-warning">
+            <strong>⚠️ Allergen Warning:</strong>
+            Food items may be in contact with treenuts, peanuts,
+            wheat and milk in our processed place.
+        </div>
+
+        <!-- Ready to Eat -->
+        <div class="section">
+            <div class="section-title">🍲 Ready-to-Eat Combo Varieties</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly Combo</div>
+                        <div class="item-description">3 soft idlies + sambhar + chutney</div>
+                        <div class="item-size">Steamed idlies served with spiced lentil curry and fresh chutney</div>
+                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly Combo" data-price="14" data-chutney="full"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly + Chicken Curry Combo</div>
+                        <div class="item-description">3 soft idlies + chicken curry + chutney</div>
+                        <div class="item-size">Soft idlies with tender chicken in aromatic spiced gravy</div>
+                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly + Chicken Curry Combo" data-price="14" data-chutney="full"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly + Cauliflower/Mushroom Curry Combo</div>
+                        <div class="item-description">3 soft idlies + vegetable curry + chutney</div>
+                        <div class="item-size">Soft idlies with fresh vegetables in creamy spiced gravy</div>
+                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly + Cauliflower/Mushroom Curry Combo" data-price="14" data-chutney="full"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Upma Combo</div>
+                        <div class="item-description">Savory semolina with onions and spices</div>
+                        <div class="item-size">12oz | Served with sambhar and chutney</div>
+                        <div class="item-options">Choose one chutney variety (Coconut or Peanut)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Upma Combo" data-price="14" data-chutney="limited"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Poori + Potato Masala Combo</div>
+                        <div class="item-description">4 medium-sized puris served with Tamil Nadu style potato masala</div>
+                        <div class="item-size">Crispy fried bread with spiced potatoes</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Poori + Potato Masala Combo" data-price="14"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Kara Paniyaram</div>
+                        <div class="item-description">Crispy golden batter balls with onions, coriander and tadka</div>
+                        <div class="item-size">9 nos served with chutney</div>
+                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Kara Paniyaram" data-price="14" data-chutney="full"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Plain Uthappam Combo</div>
+                        <div class="item-description">3 soft rice pancakes + sambhar + chutney</div>
+                        <div class="item-size">Plain fluffy uthappam served with sambhar and chutney</div>
+                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Plain Uthappam Combo" data-price="14" data-chutney="full"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Lemon Rice with Potato Fry</div>
+                        <div class="item-description">Rice tempered with lemon extract, peanuts, mustard seeds, and coriander leaves</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Lemon Rice with Potato Fry" data-price="14"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tomato Rice with Potato Fry</div>
+                        <div class="item-description">Rice cooked with tomatoes, onions, and garam masala</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Tomato Rice with Potato Fry" data-price="14"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tamarind Rice with Potato Fry</div>
+                        <div class="item-description">Rice tempered with tamarind, mustard seeds and curry leaves</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Tamarind Rice with Potato Fry" data-price="15"></div></div>
+            </div>
+        </div>
+
+        <!-- Semi Dry -->
+        <div class="section">
+            <div class="section-title">🥘 Semi Dry Varieties</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Chicken Chukka</div>
+                        <div class="item-description">Boneless chicken tossed in homestyle Madras masala</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$18</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Chicken Chukka" data-price="18"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mushroom Chukka</div>
+                        <div class="item-description">Mushrooms tossed in homestyle Madras masala</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$18</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Mushroom Chukka" data-price="18"></div></div>
+            </div>
+        </div>
+
+        <!-- Curries -->
+        <div class="section">
+            <div class="section-title">🥣 Curries</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Chicken Curry</div>
+                        <div class="item-description">Tender chicken in aromatic spiced gravy with coconut paste</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Chicken Curry" data-price="15"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Cauliflower/Mushroom Curry</div>
+                        <div class="item-description">Spiced madras style gravy with coconut paste</div>
+                        <div class="item-size">12oz | Choose cauliflower or mushroom</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Cauliflower/Mushroom Curry" data-price="15"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Vegetable Kuruma</div>
+                        <div class="item-description">Fresh vegetables cooked in onion tomato coconut base</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Vegetable Kuruma" data-price="15"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Egg Gravy</div>
+                        <div class="item-description">Broken eggs simmered in homestyle masala gravy with coconut paste, onions and tomatoes</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Egg Gravy" data-price="15"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tomato Kuzhambu</div>
+                        <div class="item-description">Tomatoes and onions simmered in coconut-based gravy</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Tomato Kuzhambu" data-price="15"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Potato Masala</div>
+                        <div class="item-description">Tamil Nadu style spiced potatoes (can be used for making masala dosa)</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Potato Masala" data-price="12"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Poondu Kuzhambu</div>
+                        <div class="item-description">Garlic cooked in spiced lentil curry with coconut paste</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Poondu Kuzhambu" data-price="15"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Sambhar</div>
+                        <div class="item-description">Tamil Nadu style spiced lentil curry with vegetables</div>
+                        <div class="item-size">12oz fresh sambhar</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Sambhar" data-price="12"></div></div>
+            </div>
+        </div>
+
+        <!-- Traditional Tamil Nadu Curries -->
+        <div class="section">
+            <div class="section-title">🌾 Traditional Tamil Nadu Curries</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Bottle Gourd Kootu</div>
+                        <div class="item-description">Bottle Gourd cooked in peanut and masala base</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Bottle Gourd Kootu" data-price="9"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Okra Thokku</div>
+                        <div class="item-description">Soft okra cooked with onions, tomato, and tangy tamarind paste</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Okra Thokku" data-price="9"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Squash/Chayote Kootu</div>
+                        <div class="item-description">Chayote cooked in lentils and coconut paste</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Squash/Chayote Kootu" data-price="9"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Uppu Paruppu</div>
+                        <div class="item-description">Mashed and seasoned lentils (Toor dhal) with ghee tempering</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Uppu Paruppu" data-price="9"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Green Gram Kadayal</div>
+                        <div class="item-description">Mashed and seasoned lentils (Green gram) with ghee tempering</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Green Gram Kadayal" data-price="9"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Kathrikkai Rajma Kuzhambu</div>
+                        <div class="item-description">Indian eggplant and rajma cooked in spiced curry</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Kathrikkai Rajma Kuzhambu" data-price="9"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Okra Tamarind Coconut Gravy</div>
+                        <div class="item-description">Soft okra in tangy tamarind and coconut-based gravy</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Okra Tamarind Coconut Gravy" data-price="9"></div></div>
+            </div>
+        </div>
+
+        <!-- Sundal -->
+        <div class="section">
+            <div class="section-title">🌾 Sundal (Boiled Legume Salad)</div>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Traditional Tamil Nadu comfort food - cooked legumes with onions, green chilli and coconut • 6oz each</p>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Black Channa Sundal</div>
+                        <div class="item-description">Black chickpeas with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Black Channa Sundal" data-price="8"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">White Channa Sundal</div>
+                        <div class="item-description">White chickpeas with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="White Channa Sundal" data-price="8"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Green Gram Sundal</div>
+                        <div class="item-description">Green gram with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Green Gram Sundal" data-price="8"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Rajma Sundal</div>
+                        <div class="item-description">Kidney beans with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Rajma Sundal" data-price="8"></div></div>
+            </div>
+        </div>
+
+        <!-- Poriyal -->
+        <div class="section">
+            <div class="section-title">🥬 Poriyal (Stir-fried Vegetables)</div>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Stir-fried vegetables with coconut and tadka • 6oz each</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Beetroot</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Beetroot Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Cabbage</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Cabbage Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Carrot</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Carrot Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Carrot + Beans</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Carrot + Beans Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Pumpkin</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Pumpkin Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Potato</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Potato Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Spinach</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Spinach Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Okra</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Okra Poriyal" data-price="8"></div></div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Indian Eggplant</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                    <div class="item-footer"><div class="qty-controls" data-name="Indian Eggplant Poriyal" data-price="8"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chutney -->
+        <div class="section">
+            <div class="section-title">🌿 Chutney Varieties</div>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Fresh ground condiment (6oz). Served as a dipping accompaniment to all South Indian meals.</p>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Coconut Chutney</div>
+                        <div class="item-description">Coconut, lentils, green chillies, ginger, garlic</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Coconut Chutney" data-price="7"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tomato Chutney</div>
+                        <div class="item-description">Tomatoes, onions, chillies, coconut, tamarind</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Tomato Chutney" data-price="7"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Peanut Chutney</div>
+                        <div class="item-description">Peanuts, red chillies, coconut, tamarind</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Peanut Chutney" data-price="7"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mint + Coriander Chutney</div>
+                        <div class="item-description">Fresh mint, coriander, ginger, green chillies, coconut</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Mint + Coriander Chutney" data-price="7"></div></div>
+            </div>
+        </div>
+
+        <!-- Sides -->
+        <div class="section">
+            <div class="section-title">➕ Sides & Add-ons</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Extra Idly</div>
+                        <div class="item-description">1 soft fresh idly | Perfect add-on to any combo</div>
+                    </div>
+                    <div class="item-price">$2.50</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Extra Idly" data-price="2.50"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mini Medu Vada</div>
+                        <div class="item-description">1 piece | Crispy lentil fritter with green chillies and black pepper</div>
+                    </div>
+                    <div class="item-price">$2.50</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Mini Medu Vada" data-price="2.50"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mini Paruppu Vadai</div>
+                        <div class="item-description">1 piece | Crispy lentil fritter with cumin and spices</div>
+                    </div>
+                    <div class="item-price">$2.50</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Mini Paruppu Vadai" data-price="2.50"></div></div>
+            </div>
+        </div>
+
+        <!-- Standalone -->
+        <div class="section">
+            <div class="section-title">🏠 Standalone Products</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly Dosa Batter</div>
+                        <div class="item-description">Make crispy dosas or steamed idlies at home</div>
+                        <div class="item-size">25oz fresh fermented batter | Makes 10-12 dosas</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly Dosa Batter" data-price="12"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Boiled Sona Masoori Rice</div>
+                        <div class="item-description">Steamed rice</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$6</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Boiled Sona Masoori Rice" data-price="6"></div></div>
+            </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="section">
+            <div class="section-title">🍮 Desserts</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Rava Laddu</div>
+                        <div class="item-description">Semolina balls with ghee, sugar, nuts and raisins</div>
+                        <div class="item-size">2 pieces</div>
+                    </div>
+                    <div class="item-price">$5</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Rava Laddu" data-price="5"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Kesari</div>
+                        <div class="item-description">Semolina pudding with ghee, sugar, nuts, raisins and cardamom</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$5</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Kesari" data-price="5"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Sweet Pongal</div>
+                        <div class="item-description">Authentic ghee-rich rice & lentil dessert</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Sweet Pongal" data-price="9"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Paruppu Payasam</div>
+                        <div class="item-description">Authentic ghee-rich lentil and coconut milk dessert</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Paruppu Payasam" data-price="7"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">🍲 Ooru Masala - Bringing Chennai to Vancouver 🍲</p>
+        <p>✨ All items fresh, homemade daily.</p>
+        <p>📦 Takeaway only | Pre-orders required (2 days minimum)</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+            🥘 Authentic South Indian cuisine from Tamil Nadu 🥘
+        </p>
+        <p class="small-text" style="margin-top: 1rem;">Menu and prices subject to updates. Last updated: May 2026</p>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #999;">
+            Ready to order? Add items to your cart and send us a screenshot!
+        </p>
+    </div>
+
+    <!-- FLOATING CART BUTTON -->
+    <button class="cart-fab hidden" id="cartFab" onclick="openCart()">
+        🛒 View Cart
+        <span class="cart-count" id="cartCountBadge">0</span>
+    </button>
+
+    <!-- CART MODAL -->
+    <div class="cart-modal" id="cartModal" onclick="handleModalClick(event)">
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h2>🛒 Your Order</h2>
+                <button class="close-btn" onclick="closeCart()">✕</button>
+            </div>
+            <div class="cart-items" id="cartItemsList">
+                <div class="cart-empty">Your cart is empty.<br>Add items from the menu above!</div>
+            </div>
+            <div class="cart-footer" id="cartFooter" style="display:none;">
+                <div class="cart-total-row" style="margin-top:0.8rem;">
+                    <span class="cart-total-label">Total</span>
+                    <span class="cart-total-amount" id="cartTotalAmount">$0</span>
+                </div>
+                <div class="cart-note">
+                    📸 Click below to see your order summary — then take a screenshot and send it to place your order!
+                </div>
+                <button class="screenshot-btn" onclick="openPrintView()">
+                    📋 View Order Summary
+                </button>
+                <button class="clear-btn" onclick="clearCart()">🗑 Clear Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRINT / SCREENSHOT VIEW -->
+    <div class="print-view" id="printView">
+        <div class="print-actions no-print">
+            <button class="btn-back" onclick="closePrintView()">← Back to Cart</button>
+            <button class="btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
+        </div>
+        <div class="print-instructions no-print">
+            📱 <strong>To order:</strong> Take a screenshot of this page and send it to Ooru Masala Home via WhatsApp or Instagram DM. Remember to include your preferred pickup date (minimum 2 days notice)!
+        </div>
+
+        <!-- Pickup details form (visible on screen, hidden on print) -->
+        <div class="name-input-row no-print" id="pickupDetailsForm">
+            <div style="margin-bottom:1rem;">
+                <label class="name-label">👤 Full Name <span style="color:#dc2626;">*</span></label>
+                <input type="text" id="pickupName" class="name-input"
+                    placeholder="e.g. Priya Sharma"
+                    autocomplete="name"
+                    oninput="updatePickupDetails()" />
+                <div class="pickup-error-msg" id="nameErr">⚠️ Please enter your name.</div>
+            </div>
+            <div style="margin-bottom:1rem;">
+                <label class="name-label">📞 Contact Number <span style="color:#dc2626;">*</span></label>
+                <input type="tel" id="pickupPhone" class="name-input"
+                    placeholder="e.g. 604-555-1234"
+                    autocomplete="tel"
+                    oninput="updatePickupDetails()" />
+                <div class="pickup-error-msg" id="phoneErr">⚠️ Please enter your contact number.</div>
+            </div>
+            <div style="margin-bottom:1rem;">
+                <label class="name-label">📅 Pickup Date <span style="color:#dc2626;">*</span></label>
+                <input type="date" id="pickupDate" class="name-input"
+                    onchange="updatePickupDetails()" />
+                <div class="pickup-error-msg" id="dateErr">⚠️ Please select a pickup date (minimum 2 days from today).</div>
+            </div>
+            <div>
+                <label class="name-label">🕓 Pickup Time <span style="color:#dc2626;">*</span></label>
+                <select id="pickupTime" class="name-input" onchange="updatePickupDetails()" style="cursor:pointer;">
+                    <option value="">— Select a time slot —</option>
+                    <option value="4:00 PM">4:00 PM</option>
+                    <option value="5:00 PM">5:00 PM</option>
+                    <option value="6:00 PM">6:00 PM</option>
+                    <option value="7:00 PM">7:00 PM</option>
+                </select>
+                <div class="pickup-error-msg" id="timeErr">⚠️ Please select a pickup time.</div>
+            </div>
+        </div>
+
+        <div class="print-header">
+            <h1>🍲 Ooru Masala Home</h1>
+            <p>Authentic South Indian Cuisine · Pickup near Lonsdale Quay, North Vancouver</p>
+            <p class="print-date" id="printDate"></p>
+        </div>
+
+        <!-- Customer & pickup summary box (shown in both screen and print) -->
+        <div id="pickupSummaryBox" style="display:none; background:#faf5ff; border:2px solid #e9d5ff; border-radius:12px; padding:1rem 1.3rem; margin-bottom:1.5rem;">
+            <div style="font-weight:800; color:#7c3aed; font-size:1rem; margin-bottom:0.6rem;">📋 Order Details</div>
+            <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+                <tr>
+                    <td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666; width:38%;">👤 Name</td>
+                    <td style="padding:0.3rem 0; font-weight:700; color:#1a1a1a;" id="summaryName">—</td>
+                </tr>
+                <tr>
+                    <td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666;">📞 Contact</td>
+                    <td style="padding:0.3rem 0; font-weight:700; color:#1a1a1a;" id="summaryPhone">—</td>
+                </tr>
+                <tr>
+                    <td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666;">📅 Pickup Date</td>
+                    <td style="padding:0.3rem 0; font-weight:700; color:#1a1a1a;" id="summaryDate">—</td>
+                </tr>
+                <tr>
+                    <td style="padding:0.3rem 0.5rem 0.3rem 0; color:#666;">🕓 Pickup Time</td>
+                    <td style="padding:0.3rem 0; font-weight:700; color:#1a1a1a;" id="summaryTime">—</td>
+                </tr>
+            </table>
+        </div>
+        <table class="print-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th style="text-align:center;">Qty</th>
+                    <th style="text-align:right;">Price</th>
+                    <th style="text-align:right;">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="printTableBody"></tbody>
+            <tfoot>
+                <tr class="print-total-row">
+                    <td colspan="3">Order Total</td>
+                    <td id="printTotal"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="print-footer">
+            <p><strong>Pre-orders only · Minimum 2 days notice required</strong></p>
+            <p style="margin-top:0.4rem;">Please confirm your preferred pickup date when sending this order.</p>
+            <p style="margin-top:0.4rem; color:#999;">Prices in CAD · Menu updated May 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // ── Chutney options per type ────────────────────────────
+        const CHUTNEY_FULL    = ['Coconut', 'Peanut', 'Tomato', 'Coriander'];
+        const CHUTNEY_LIMITED = ['Coconut', 'Peanut'];
+
+        // Build a lookup: itemName → chutney array (or null)
+        const chutneyMap = {};
+        document.querySelectorAll('.qty-controls[data-chutney]').forEach(el => {
+            chutneyMap[el.dataset.name] = el.dataset.chutney === 'full' ? CHUTNEY_FULL : CHUTNEY_LIMITED;
+        });
+
+        // ── Cart State ──────────────────────────────────────────
+        // { itemName: { qty, price, chutney (string|null) } }
+        let cart = {};
+
+        // ── Initialise qty controls ─────────────────────────────
+        document.querySelectorAll('.qty-controls').forEach(el => {
+            const name  = el.dataset.name;
+            const price = parseFloat(el.dataset.price);
+            el.innerHTML = `
+                <button class="qty-btn" onclick="changeQty('${CSS.escape(name)}', -1, ${price})">−</button>
+                <span class="qty-display" id="qty_${CSS.escape(name)}">0</span>
+                <button class="qty-btn" onclick="changeQty('${CSS.escape(name)}', 1, ${price})">+</button>
+            `;
+        });
+
+        // ── Resolve escaped name back to real name ──────────────
+        function realNameFor(escapedName) {
+            let found = null;
+            document.querySelectorAll('.qty-controls').forEach(el => {
+                if (CSS.escape(el.dataset.name) === escapedName || el.dataset.name === escapedName)
+                    found = el.dataset.name;
+            });
+            return found || escapedName;
+        }
+
+        // ── Core cart logic ─────────────────────────────────────
+        function changeQty(escapedName, delta, price) {
+            const name = realNameFor(escapedName);
+            if (!cart[name]) cart[name] = { qty: 0, price, chutney: null };
+            cart[name].qty = Math.max(0, cart[name].qty + delta);
+            if (cart[name].qty === 0) delete cart[name];
+
+            const display = document.getElementById(`qty_${CSS.escape(name)}`);
+            if (display) display.textContent = cart[name] ? cart[name].qty : 0;
+            updateCartFab();
+        }
+
+        function updateCartFab() {
+            const fab   = document.getElementById('cartFab');
+            const badge = document.getElementById('cartCountBadge');
+            const total = Object.values(cart).reduce((s, v) => s + v.qty, 0);
+            if (total > 0) { fab.classList.remove('hidden'); badge.textContent = total; }
+            else             fab.classList.add('hidden');
+        }
+
+        function openCart() {
+            renderCartItems();
+            document.getElementById('cartModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function handleModalClick(e) {
+            if (e.target === document.getElementById('cartModal')) closeCart();
+        }
+
+        // ── Render cart ─────────────────────────────────────────
+        function renderCartItems() {
+            const list   = document.getElementById('cartItemsList');
+            const footer = document.getElementById('cartFooter');
+            const items  = Object.entries(cart);
+
+            if (items.length === 0) {
+                list.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Add items from the menu above!</div>';
+                footer.style.display = 'none';
+                return;
+            }
+
+            let total = 0;
+            let html  = '';
+            items.forEach(([name, { qty, price, chutney }]) => {
+                const sub      = qty * price;
+                total         += sub;
+                const safeName = name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                const options  = chutneyMap[name];
+
+                let chutneyHtml = '';
+                if (options) {
+                    const opts = options.map(o =>
+                        `<option value="${o}" ${chutney === o ? 'selected' : ''}>${o} Chutney</option>`
+                    ).join('');
+                    chutneyHtml = `
+                        <div class="chutney-row" id="chutney_row_${CSS.escape(name)}">
+                            <div class="chutney-label">🌿 Choose chutney</div>
+                            <select class="chutney-select" id="chutney_sel_${CSS.escape(name)}"
+                                onchange="saveChutneyChoice('${safeName}', this.value)">
+                                <option value="">— Select chutney —</option>
+                                ${opts}
+                            </select>
+                            <div class="chutney-error-msg" id="chutney_err_${CSS.escape(name)}">
+                                ⚠️ Please select a chutney to continue.
+                            </div>
+                        </div>`;
+                }
+
+                html += `
+                    <div class="cart-item-row" style="flex-wrap:wrap;">
+                        <span class="cart-item-name" style="flex-basis:100%;margin-bottom:0.3rem;">${name}</span>
+                        <div style="display:flex;align-items:center;gap:0.5rem;width:100%;justify-content:space-between;">
+                            <div class="cart-item-qty">
+                                <button class="cart-qty-btn" onclick="cartChangeQty('${safeName}', -1, ${price})">−</button>
+                                <span class="cart-qty-num">${qty}</span>
+                                <button class="cart-qty-btn" onclick="cartChangeQty('${safeName}', 1, ${price})">+</button>
+                            </div>
+                            <span class="cart-item-subtotal">$${sub % 1 === 0 ? sub : sub.toFixed(2)}</span>
+                        </div>
+                        ${chutneyHtml}
+                    </div>`;
+            });
+
+            list.innerHTML = html;
+            document.getElementById('cartTotalAmount').textContent =
+                '$' + (total % 1 === 0 ? total : total.toFixed(2));
+            footer.style.display = 'block';
+        }
+
+        function saveChutneyChoice(name, value) {
+            if (cart[name]) {
+                cart[name].chutney = value || null;
+                // Clear error if they picked something
+                const err = document.getElementById(`chutney_err_${CSS.escape(name)}`);
+                const sel = document.getElementById(`chutney_sel_${CSS.escape(name)}`);
+                if (err && value) { err.classList.remove('visible'); sel.classList.remove('error'); }
+            }
+        }
+
+        function cartChangeQty(name, delta, price) {
+            if (!cart[name]) cart[name] = { qty: 0, price, chutney: null };
+            cart[name].qty = Math.max(0, cart[name].qty + delta);
+            if (cart[name].qty === 0) delete cart[name];
+
+            const display = document.getElementById(`qty_${CSS.escape(name)}`);
+            if (display) display.textContent = cart[name] ? cart[name].qty : 0;
+            updateCartFab();
+            renderCartItems();
+        }
+
+        function clearCart() {
+            cart = {};
+            document.querySelectorAll('.qty-display').forEach(el => el.textContent = '0');
+            updateCartFab();
+            renderCartItems();
+        }
+
+        // ── Pickup details: live summary update ──────────────────
+        function updatePickupDetails() {
+            const name  = document.getElementById('pickupName').value.trim();
+            const phone = document.getElementById('pickupPhone').value.trim();
+            const date  = document.getElementById('pickupDate').value;
+            const time  = document.getElementById('pickupTime').value;
+
+            const box = document.getElementById('pickupSummaryBox');
+            if (name || phone || date || time) {
+                box.style.display = 'block';
+                document.getElementById('summaryName').textContent  = name  || '—';
+                document.getElementById('summaryPhone').textContent = phone || '—';
+                if (date) {
+                    const d = new Date(date + 'T00:00:00');
+                    document.getElementById('summaryDate').textContent =
+                        d.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+                } else {
+                    document.getElementById('summaryDate').textContent = '—';
+                }
+                document.getElementById('summaryTime').textContent = time || '—';
+            } else {
+                box.style.display = 'none';
+            }
+        }
+
+        // ── Print view with chutney + pickup validation ──────────
+        function openPrintView() {
+            const items = Object.entries(cart);
+            if (items.length === 0) return;
+
+            // Validate: every chutney item must have a selection
+            let hasError = false;
+            items.forEach(([name, { chutney }]) => {
+                if (chutneyMap[name] && !chutney) {
+                    hasError = true;
+                    const err = document.getElementById(`chutney_err_${CSS.escape(name)}`);
+                    const sel = document.getElementById(`chutney_sel_${CSS.escape(name)}`);
+                    if (err) err.classList.add('visible');
+                    if (sel) sel.classList.add('error');
+                }
+            });
+            if (hasError) {
+                const firstErr = document.querySelector('.chutney-select.error');
+                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Build print table
+            const now = new Date();
+            document.getElementById('printDate').textContent =
+                'Order prepared: ' + now.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+            // Reset pickup form
+            document.getElementById('pickupName').value  = '';
+            document.getElementById('pickupPhone').value = '';
+            document.getElementById('pickupDate').value  = '';
+            document.getElementById('pickupTime').value  = '';
+            document.getElementById('pickupSummaryBox').style.display = 'none';
+            ['nameErr','phoneErr','dateErr','timeErr'].forEach(id => {
+                document.getElementById(id).classList.remove('visible');
+            });
+            ['pickupName','pickupPhone','pickupDate','pickupTime'].forEach(id => {
+                document.getElementById(id).classList.remove('field-error');
+            });
+
+            // Set minimum date (2 days from today)
+            const minDate = new Date();
+            minDate.setDate(minDate.getDate() + 2);
+            document.getElementById('pickupDate').min = minDate.toISOString().split('T')[0];
+
+            let total = 0;
+            let rows  = '';
+            items.forEach(([name, { qty, price, chutney }]) => {
+                const sub    = qty * price;
+                total       += sub;
+                const detail = chutney
+                    ? `<br><span style="font-size:0.82rem;color:#7c3aed;font-style:italic;">🌿 ${chutney} Chutney</span>`
+                    : '';
+                rows += `<tr>
+                    <td>${name}${detail}</td>
+                    <td style="text-align:center;">${qty}</td>
+                    <td style="text-align:right;">$${price % 1 === 0 ? price : price.toFixed(2)}</td>
+                    <td>$${sub % 1 === 0 ? sub : sub.toFixed(2)}</td>
+                </tr>`;
+            });
+            document.getElementById('printTableBody').innerHTML = rows;
+            document.getElementById('printTotal').textContent =
+                '$' + (total % 1 === 0 ? total : total.toFixed(2));
+
+            closeCart();
+            document.getElementById('printView').classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => document.getElementById('pickupName').focus(), 300);
+        }
+
+        function closePrintView() {
+            document.getElementById('printView').classList.remove('open');
+            document.body.style.overflow = '';
+            openCart();
+        }
+
+        // ── Validate pickup details before print/save ────────────
+        (function patchPrintButton() {
+            // Override window.print to validate first
+            const origPrint = window.print.bind(window);
+            document.querySelector('.btn-print').onclick = function() {
+                const name  = document.getElementById('pickupName').value.trim();
+                const phone = document.getElementById('pickupPhone').value.trim();
+                const date  = document.getElementById('pickupDate').value;
+                const time  = document.getElementById('pickupTime').value;
+                const minDate = new Date();
+                minDate.setDate(minDate.getDate() + 2);
+                const selectedDate = date ? new Date(date + 'T00:00:00') : null;
+
+                let valid = true;
+
+                function setErr(fieldId, errId, show) {
+                    document.getElementById(errId).classList.toggle('visible', show);
+                    document.getElementById(fieldId).classList.toggle('field-error', show);
+                    if (show) valid = false;
+                }
+
+                setErr('pickupName',  'nameErr',  !name);
+                setErr('pickupPhone', 'phoneErr', !phone);
+                setErr('pickupDate',  'dateErr',  !date || selectedDate < minDate);
+                setErr('pickupTime',  'timeErr',  !time);
+
+                if (!valid) {
+                    document.getElementById('pickupDetailsForm').scrollIntoView({ behavior:'smooth', block:'start' });
+                    return;
+                }
+                origPrint();
+            };
+        })();
+    </script>
+</body>
+</html>
