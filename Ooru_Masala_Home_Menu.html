@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ooru Masala Home - South Indian Takeaway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f3ff 0%, #f0f9ff 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+            padding: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 0.3rem;
+        }
+
+        .location {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .notice {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            border-left: 3px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e9d5ff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid #8b5cf6;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1a1a1a;
+            flex: 1;
+        }
+
+        .item-price {
+            background: #8b5cf6;
+            color: white;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 0.3rem;
+        }
+
+        .item-size {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        .item-options {
+            color: #8b5cf6;
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            font-weight: 500;
+        }
+
+        .spice-notice {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .footer {
+            background: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            color: #8b5cf6;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .menu-item {
+                padding: 1rem;
+            }
+
+            .item-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .item-price {
+                align-self: flex-start;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        .small-text {
+            font-size: 0.8rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🍲 Ooru Masala Home 🥘</h1>
+        <div class="location">📍 Pickup near Lonsdale Quay, North Vancouver, BC</div>
+        <p>Authentic South Indian Cuisine from Chennai</p>
+        <div class="notice">
+            ✓ Pre-orders only (2 days minimum)
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="spice-notice">
+            🌶️ Default spice level is <strong>MEDIUM</strong>. Please let us know if you need mild or spicier versions.
+        </div>
+
+        <div style="background: #fee2e2; border-left: 4px solid #dc2626; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 8px; font-size: 0.95rem; color: #7f1d1d;">
+            <strong>⚠️ Allergen Warning:</strong> Food items may be in contact with treenuts, peanuts, wheat and milk in our processed place.
+        </div>
+
+        <!-- Ready to Eat -->
+        <div class="section">
+            <div class="section-title">🍲 Ready-to-Eat Combo Varieties</div>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly Combo</div>
+                        <div class="item-description">3 soft idlies + sambhar + chutney</div>
+                        <div class="item-size">Steamed idlies served with spiced lentil curry and fresh chutney</div>
+                        <div class="item-options">Choose chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly + Chicken Curry Combo</div>
+                        <div class="item-description">3 soft idlies + chicken curry + chutney</div>
+                        <div class="item-size">Soft idlies with tender chicken in aromatic spiced gravy</div>
+                        <div class="item-options">Choose chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly + Cauliflower/Mushroom Curry Combo</div>
+                        <div class="item-description">3 soft idlies + vegetable curry + chutney</div>
+                        <div class="item-size">Soft idlies with fresh vegetables in creamy spiced gravy</div>
+                        <div class="item-options">Choose chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Upma Combo</div>
+                        <div class="item-description">Savory semolina with onions and spices</div>
+                        <div class="item-size">12oz | Served with sambhar and chutney</div>
+                        <div class="item-options">Choose chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Poori + Potato Masala Combo</div>
+                        <div class="item-description">4 medium-sized puris served with Tamil Nadu style potato masala</div>
+                        <div class="item-size">Crispy fried bread with spiced potatoes</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Kara Paniyaram</div>
+                        <div class="item-description">Crispy golden batter balls with onions, coriander and tadka - made from dosa batter</div>
+                        <div class="item-size">9 nos served with chutney</div>
+                        <div class="item-options">Choose chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+			<div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Plain Uthappam Combo</div>
+                        <div class="item-description">3 soft rice pancakes + sambhar + chutney</div>
+                        <div class="item-size">Plain fluffy uthappam served with sambhar and chutney</div>
+                        <div class="item-options">Choose chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Lemon Rice</div>
+                        <div class="item-description">Rice tempered with lemon, mustard seeds, and coriander leaves</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tomato Rice</div>
+                        <div class="item-description">Rice cooked with tomatoes, onions, and garam masala</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tamarind Rice</div>
+                        <div class="item-description">Rice tempered with tamarind, mustard seeds and curry leaves</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="section">
+            <div class="section-title">🥘 Semi Dry Varieties</div>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Chicken Chukka</div>
+                        <div class="item-description">Boneless chicken tossed in homestyle Madras masala</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$18</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mushroom Chukka</div>
+                        <div class="item-description">Mushrooms tossed in homestyle Madras masala</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$18</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🥣 Curries</div>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Chicken Curry</div>
+                        <div class="item-description">Tender chicken in aromatic spiced gravy with coconut paste</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Cauliflower/Mushroom Curry</div>
+                        <div class="item-description">Spiced madras style gravy with coconut paste</div>
+                        <div class="item-size">12oz | Choose cauliflower or mushroom</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Vegetable Kuruma</div>
+                        <div class="item-description">Fresh vegetables cooked in onion tomato coconut base</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Egg Gravy</div>
+                        <div class="item-description">Broken eggs simmered in homestyle masala gravy with coconut paste, onions and tomatoes</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tomato Kuzhambu</div>
+                        <div class="item-description">Tomatoes and onions simmered in coconut-based gravy</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Potato Masala</div>
+                        <div class="item-description">Tamil Nadu style spiced potatoes (can be used for making masala dosa)</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Poondu Kuzhambu</div>
+                        <div class="item-description">Garlic cooked in spiced lentil curry with coconut paste</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$15</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Sambhar</div>
+                        <div class="item-description">Tamil Nadu style Spiced lentil curry with vegetables</div>
+                        <div class="item-size">12oz fresh sambhar</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traditional Tamil Nadu Curries -->
+        <div class="section">
+            <div class="section-title">🌾 Traditional Tamil Nadu Curries</div>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Bottle Gourd Kootu</div>
+                        <div class="item-description">Bottle Gourd cooked in peanut and masala base</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Okra Thokku</div>
+                        <div class="item-description">Soft okra cooked with onions, tomato, and tangy tamarind paste</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Squash/Chayote Kootu</div>
+                        <div class="item-description">Chayote cooked in lentils and coconut paste</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Uppu Paruppu</div>
+                        <div class="item-description">Mashed and seasoned lentils (Toor dhal) with ghee tempering</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Green Gram Kadayal</div>
+                        <div class="item-description">Mashed and seasoned lentils (Green gram) with ghee tempering</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Kathrikkai Rajma Kuzhambu</div>
+                        <div class="item-description">Indian eggplant and rajma cooked in spiced curry</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Okra Tamarind Coconut Gravy</div>
+                        <div class="item-description">Soft okra in tangy tamarind and coconut-based gravy</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sundal -->
+        <div class="section">
+            <div class="section-title">🌾 Sundal (Boiled Legume Salad)</div>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Traditional Tamil Nadu comfort food - cooked legumes with onions, green chilli and coconut • 6oz each</p>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Black Channa Sundal</div>
+                        <div class="item-description">Black chickpeas with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">White Channa Sundal</div>
+                        <div class="item-description">White chickpeas with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Green Gram Sundal</div>
+                        <div class="item-description">Green gram with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Rajma Sundal</div>
+                        <div class="item-description">Kidney beans with onions, green chilli and coconut</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$8</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🥬 Poriyal (Stir-fried Vegetables)</div>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Stir-fried vegetables with coconut and tadka • 6oz each</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Beetroot</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Cabbage</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Carrot</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Carrot + Beans</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Pumpkin</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Potato</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Spinach</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+                <div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Okra</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+				<div class="menu-item" style="margin-bottom: 0;">
+                    <div class="item-header" style="flex-direction: column;">
+                        <div class="item-name">Indian Eggplant</div>
+                        <div class="item-price">$8</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chutney -->
+        <div class="section">
+            <div class="section-title">🌶️ Chutney Varieties</div>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Fresh ground condiment (6oz). Served as a dipping accompaniment to all South Indian meals.</p>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Coconut Chutney</div>
+                        <div class="item-description">Coconut, lentils, green chillies, ginger, garlic</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Tomato Chutney</div>
+                        <div class="item-description">Tomatoes, onions, chillies, coconut, tamarind</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Peanut Chutney</div>
+                        <div class="item-description">Peanuts, red chillies, coconut, tamarind</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mint + Coriander Chutney</div>
+                        <div class="item-description">Fresh mint, coriander, ginger, green chillies, coconut</div>
+                    </div>
+                    <div class="item-price">$7</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">➕ Sides & Add-ons</div>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Extra Idly</div>
+                        <div class="item-description">1 soft fresh idly | Perfect add-on to any combo</div>
+                    </div>
+                    <div class="item-price">$2.50</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mini Medu Vada</div>
+                        <div class="item-description">1 piece | Crispy lentil fritter with green chillies and black pepper</div>
+                    </div>
+                    <div class="item-price">$2.50</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Mini Paruppu Vadai</div>
+                        <div class="item-description">1 piece | Crispy lentil fritter with cumin and spices</div>
+                    </div>
+                    <div class="item-price">$2.50</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standalone Products -->
+        <div class="section">
+            <div class="section-title">🏠 Standalone Products</div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly Dosa Batter</div>
+                        <div class="item-description">Make crispy dosas or steamed idlies at home</div>
+                        <div class="item-size">25oz fresh fermented batter | Makes 10-12 dosas</div>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+            </div>
+			<div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Boiled Sona Masoori Rice</div>
+                        <div class="item-description">Steamed rice</div>
+                        <div class="item-size">12oz</div>
+                    </div>
+                    <div class="item-price">$6</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🍮 Desserts</div>
+            
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Rava Laddu</div>
+                        <div class="item-description">Semolina balls with ghee, sugar, nuts and raisins</div>
+                        <div class="item-size">2 pieces</div>
+                    </div>
+                    <div class="item-price">$5</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Kesari</div>
+                        <div class="item-description">Semolina pudding with ghee, sugar, nuts, raisins and cardamom</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$5</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Sweet Pongal</div>
+                        <div class="item-description">Authentic ghee-rich rice & lentil dessert</div>
+                        <div class="item-size">6oz</div>
+                    </div>
+                    <div class="item-price">$9</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">🍲 Ooru Masala - Bringing Chennai to Vancouver 🍲</p>
+        <p>✨ All items fresh, homemade daily.</p>
+        <p>📦 Takeaway only | Pre-orders required (2 days minimum)</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+            🥘 Authentic South Indian cuisine from Tamil Nadu 🥘
+        </p>
+        <p class="small-text" style="margin-top: 1rem;">Menu and prices subject to updates. Last updated: May 2026</p>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #999;">
+            Ready to order? Contact us for details
+        </p>
+    </div>
+</body>
+</html>
