@@ -442,6 +442,26 @@
         }
 
         .clear-btn:hover { background: #fff1f1; }
+		/* Size selection curries */
+		.size-variant-row {
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    margin-top: 0.7rem;
+		    padding-top: 0.7rem;
+		    border-top: 1px dashed #e9d5ff;
+		}
+		.size-label {
+		    font-size: 0.88rem;
+		    font-weight: 600;
+		    color: #7c3aed;
+		}
+		.size-price {
+		    font-size: 0.88rem;
+		    color: #444;
+		    font-weight: 600;
+		    margin-right: 0.8rem;
+		}
 
         /* PRINT / SCREENSHOT VIEW */
         .print-view {
@@ -1082,19 +1102,32 @@
         </div>
 
         <!-- Traditional Tamil Nadu Curries -->
+        <!-- Traditional Tamil Nadu Curries -->
         <div class="section">
             <div class="section-title">🌾 Traditional Tamil Nadu Curries</div>
+            <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Choose 8oz ($9) or 16oz ($16) for each curry</p>
 
             <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Bottle Gourd Kootu</div>
                         <div class="item-description">Bottle Gourd cooked in peanut and masala base</div>
-                        <div class="item-size">6oz</div>
                     </div>
-                    <div class="item-price">$9</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Bottle Gourd Kootu" data-price="9"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Bottle Gourd Kootu 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Bottle Gourd Kootu 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="menu-item">
@@ -1102,11 +1135,22 @@
                     <div>
                         <div class="item-name">Okra Thokku</div>
                         <div class="item-description">Soft okra cooked with onions, tomato, and tangy tamarind paste</div>
-                        <div class="item-size">6oz</div>
                     </div>
-                    <div class="item-price">$9</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Okra Thokku" data-price="9"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Okra Thokku 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Okra Thokku 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="menu-item">
@@ -1114,23 +1158,45 @@
                     <div>
                         <div class="item-name">Squash/Chayote Kootu</div>
                         <div class="item-description">Chayote cooked in lentils and coconut paste</div>
-                        <div class="item-size">6oz</div>
                     </div>
-                    <div class="item-price">$9</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Squash/Chayote Kootu" data-price="9"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Squash/Chayote Kootu 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Squash/Chayote Kootu 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
-			
-			<div class="menu-item">
+
+            <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Keerai Paruppu Masiyal</div>
                         <div class="item-description">Spinach cooked in mashed lentil paste, tempered with ghee</div>
-                        <div class="item-size">6oz</div>
                     </div>
-                    <div class="item-price">$9</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Keerai Paruppu Masiyal" data-price="9"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Keerai Paruppu Masiyal 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Keerai Paruppu Masiyal 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="menu-item">
@@ -1138,11 +1204,22 @@
                     <div>
                         <div class="item-name">Uppu Paruppu</div>
                         <div class="item-description">Mashed and seasoned lentils (Toor dhal) with ghee tempering</div>
-                        <div class="item-size">6oz</div>
                     </div>
-                    <div class="item-price">$9</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Uppu Paruppu" data-price="9"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Uppu Paruppu 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Uppu Paruppu 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="menu-item">
@@ -1150,11 +1227,22 @@
                     <div>
                         <div class="item-name">Green Gram Kadayal</div>
                         <div class="item-description">Mashed and seasoned lentils (Green gram) with ghee tempering</div>
-                        <div class="item-size">6oz</div>
                     </div>
-                    <div class="item-price">$9</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Green Gram Kadayal" data-price="9"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Green Gram Kadayal 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Green Gram Kadayal 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="menu-item">
@@ -1162,11 +1250,22 @@
                     <div>
                         <div class="item-name">Kathrikkai Rajma Kuzhambu</div>
                         <div class="item-description">Indian eggplant and rajma cooked in spiced curry</div>
-                        <div class="item-size">12oz</div>
                     </div>
-                    <div class="item-price">$16</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Kathrikkai Rajma Kuzhambu" data-price="16"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Kathrikkai Rajma Kuzhambu 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Kathrikkai Rajma Kuzhambu 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="menu-item">
@@ -1174,12 +1273,24 @@
                     <div>
                         <div class="item-name">Okra Tamarind Coconut Gravy</div>
                         <div class="item-description">Soft okra in tangy tamarind and coconut-based gravy</div>
-                        <div class="item-size">12oz</div>
                     </div>
-                    <div class="item-price">$16</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Okra Tamarind Coconut Gravy" data-price="16"></div></div>
+                <div class="size-variant-row">
+                    <span class="size-label">8oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$9</span>
+                        <div class="qty-controls" data-name="Okra Tamarind Coconut Gravy 8oz" data-price="9"></div>
+                    </div>
+                </div>
+                <div class="size-variant-row">
+                    <span class="size-label">16oz</span>
+                    <div style="display:flex; align-items:center;">
+                        <span class="size-price">$16</span>
+                        <div class="qty-controls" data-name="Okra Tamarind Coconut Gravy 16oz" data-price="16"></div>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <!-- Sundal -->
