@@ -46,6 +46,62 @@
         .section {
             margin-bottom: 2.5rem;
         }
+		/* SUB-SECTION COLLAPSIBLE */
+		.sub-section {
+			margin: 1.2rem 0 0.4rem 0;
+		}
+
+		.sub-section-title {
+			font-size: 1rem;
+			font-weight: 700;
+			color: #7c3aed;
+			background: #f3e8ff;
+			padding: 0.4rem 0.9rem;
+			border-radius: 8px;
+			margin: 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			cursor: pointer;
+			user-select: none;
+			transition: background 0.15s;
+		}
+
+		.sub-section-title:hover {
+			background: #ede9fe;
+		}
+
+		.sub-section-toggle {
+			width: 22px;
+			height: 22px;
+			border-radius: 5px;
+			background: #ddd6fe;
+			color: #7c3aed;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.1rem;
+			font-weight: 700;
+			flex-shrink: 0;
+			line-height: 1;
+			transition: background 0.15s;
+		}
+
+		.sub-section-title:hover .sub-section-toggle {
+			background: #c4b5fd;
+		}
+
+		.sub-section-body {
+			overflow: hidden;
+			transition: max-height 0.35s ease, opacity 0.25s ease;
+			max-height: 0;
+			opacity: 0;
+		}
+
+		.sub-section-body.open {
+			max-height: 5000px;
+			opacity: 1;
+		}
 
         .section-title {
             font-size: 1.4rem;
@@ -622,6 +678,60 @@
             color: #999;
         }
 
+        /* COLLAPSIBLE SECTIONS */
+        .section-title {
+            cursor: pointer;
+            user-select: none;
+            justify-content: space-between;
+        }
+
+        .section-title:hover {
+            color: #7c3aed;
+        }
+
+        .section-title-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .section-toggle {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: #ede9fe;
+            color: #7c3aed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            line-height: 1;
+            transition: background 0.15s, transform 0.2s;
+        }
+
+        .section-title:hover .section-toggle {
+            background: #ddd6fe;
+        }
+
+        .section-body {
+            overflow: hidden;
+            transition: max-height 0.35s ease, opacity 0.25s ease;
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .section-body.open {
+            max-height: 10000px;
+            opacity: 1;
+        }
+
+        .section.is-collapsed .section-toggle {
+            transform: none;
+        }
+
         @media (max-width: 768px) {
 
             .item-header { flex-direction: column; gap: 0.5rem; }
@@ -759,9 +869,10 @@
         @media print {
             .no-print { display: none !important; }
             * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+			body { overflow: visible !important; }
             body { background: white !important; margin: 0; padding: 0; }
             #menu-page, .footer, .hero-banner, .cart-fab, .cart-modal { display: none !important; }
-            #pickupView {
+			#pickupView {
 				display: block !important;
 				position: static !important;
 				overflow: visible !important;
@@ -805,22 +916,21 @@
 
         <!-- Ready to Eat -->
         <div class="section">
-            <div class="section-title">🍲 Ready-to-Eat Combo Varieties</div>
+            <div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🍲 Ready-to-Eat Combo Varieties</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
+
+            <!-- Tamil Nadu Tiffin -->
+            <div class="sub-section">
+            <div class="sub-section-title" onclick="toggleSubSection(this)">
+                <span>🫓 Tamil Nadu Tiffin</span>
+                <span class="sub-section-toggle">+</span>
+            </div>
+            <div class="sub-section-body">
 
             <div class="menu-item">
-                <div class="item-header">
-                    <div>
-                        <div class="item-name">Idly Combo</div>
-                        <div class="item-description">3 soft idlies + sambhar + chutney</div>
-                        <div class="item-size">Steamed idlies served with spiced lentil curry and fresh chutney</div>
-                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
-                    </div>
-                    <div class="item-price">$14</div>
-                </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Idly Combo" data-price="14" data-chutney="full"></div></div>
-            </div>
-			
-			 <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Medu Vada Combo</div>
@@ -835,48 +945,9 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Idly + Chicken Curry Combo</div>
-                        <div class="item-description">3 soft idlies + chicken curry + chutney</div>
-                        <div class="item-size">Soft idlies with tender chicken in aromatic spiced gravy</div>
-                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
-                    </div>
-                    <div class="item-price">$14</div>
-                </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Idly + Chicken Curry Combo" data-price="14" data-chutney="full"></div></div>
-            </div>
-
-            <div class="menu-item">
-                <div class="item-header">
-                    <div>
-                        <div class="item-name">Idly + Cauliflower Curry Combo</div>
-                        <div class="item-description">3 soft idlies + vegetable curry + chutney</div>
-                        <div class="item-size">Soft idlies with fresh vegetables in creamy spiced gravy</div>
-                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
-                    </div>
-                    <div class="item-price">$14</div>
-                </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Idly + Cauliflower Curry Combo" data-price="14" data-chutney="full"></div></div>
-            </div>
-			
-			<div class="menu-item">
-                <div class="item-header">
-                    <div>
-                        <div class="item-name">Idly + Mushroom Curry Combo</div>
-                        <div class="item-description">3 soft idlies + vegetable curry + chutney</div>
-                        <div class="item-size">Soft idlies with fresh vegetables in creamy spiced gravy</div>
-                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
-                    </div>
-                    <div class="item-price">$14</div>
-                </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Idly + Mushroom Curry Combo" data-price="14" data-chutney="full"></div></div>
-            </div>
-
-            <div class="menu-item">
-                <div class="item-header">
-                    <div>
                         <div class="item-name">Upma Combo</div>
                         <div class="item-description">Savory semolina with onions and spices</div>
-                        <div class="item-size">12oz | Served with sambhar and chutney</div>
+                        <div class="item-size">16oz | Served with sambhar and chutney</div>
                         <div class="item-options">Choose one chutney variety (Coconut or Peanut)</div>
                     </div>
                     <div class="item-price">$14</div>
@@ -884,12 +955,12 @@
                 <div class="item-footer"><div class="qty-controls" data-name="Upma Combo" data-price="14" data-chutney="limited"></div></div>
             </div>
 
-			<div class="menu-item">
+            <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Ghee Ven Pongal (South Indian Khichdi) Combo</div>
                         <div class="item-description">Traditional Tamil-style savoury rice and moong dhal dish flavoured with pepper, cumin and ghee</div>
-                        <div class="item-size">12oz | Served with sambhar and chutney</div>
+                        <div class="item-size">16oz | Served with sambhar and chutney</div>
                         <div class="item-options">Choose one chutney variety (Coconut or Peanut)</div>
                     </div>
                     <div class="item-price">$16</div>
@@ -922,31 +993,115 @@
                 <div class="item-footer"><div class="qty-controls" data-name="Kara Paniyaram" data-price="14" data-chutney="full"></div></div>
             </div>
 
+            </div><!-- end sub-section-body Tamil Nadu Tiffin -->
+            </div><!-- end sub-section Tamil Nadu Tiffin -->
+
+            <!-- Idly Combos -->
+            <div class="sub-section">
+            <div class="sub-section-title" onclick="toggleSubSection(this)">
+                <span>🍚 Idly Combos</span>
+                <span class="sub-section-toggle">+</span>
+            </div>
+            <div class="sub-section-body">
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly Combo</div>
+                        <div class="item-description">3 soft idlies + sambhar + chutney</div>
+                        <div class="item-size">Steamed idlies served with spiced lentil curry and fresh chutney</div>
+                        <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly Combo" data-price="14" data-chutney="full"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly + Chicken Curry Combo</div>
+                        <div class="item-description">3 soft idlies + chicken curry</div>
+                        <div class="item-size">Soft idlies with tender chicken in aromatic spiced gravy</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly + Chicken Curry Combo" data-price="14"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly + Cauliflower Curry Combo</div>
+                        <div class="item-description">3 soft idlies + Cauliflower curry</div>
+                        <div class="item-size">Soft idlies with fresh Cauliflower in creamy spiced gravy</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly + Cauliflower Curry Combo" data-price="14"></div></div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Idly + Mushroom Curry Combo</div>
+                        <div class="item-description">3 soft idlies + mushroom curry</div>
+                        <div class="item-size">Soft idlies with fresh mushrooms in creamy spiced gravy</div>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Idly + Mushroom Curry Combo" data-price="14"></div></div>
+            </div>
+			
+            </div><!-- end sub-section-body Idly Combos -->
+            </div><!-- end sub-section Idly Combos -->
+
+			<!-- Uthappam Combos -->
+            <div class="sub-section">
+            <div class="sub-section-title" onclick="toggleSubSection(this)">
+                <span>🥞 Uthappam Combos</span>
+                <span class="sub-section-toggle">+</span>
+            </div>
+            <div class="sub-section-body">
+
             <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Plain Uthappam Combo</div>
                         <div class="item-description">3 soft rice pancakes + sambhar + chutney</div>
-                        <div class="item-size">Plain fluffy uthappam served with sambhar and chutney</div>
+                        <div class="item-size">Medium sized plain fluffy uthappams served with sambhar and chutney</div>
                         <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
                     </div>
                     <div class="item-price">$14</div>
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Plain Uthappam Combo" data-price="14" data-chutney="full"></div></div>
             </div>
+
             <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Onion Uthappam Combo</div>
-                        <div class="item-description">3 soft rice pancakes + sambhar + chutney</div>
-                        <div class="item-size">Fluffy uthappam with onion and coriander toppings served with sambhar and chutney</div>
+                        <div class="item-description">2 soft rice pancakes + sambhar + chutney</div>
+                        <div class="item-size">Medium sized fluffy uthappams with onion and coriander toppings served with sambhar and chutney</div>
                         <div class="item-options">Choose one chutney variety (Coconut, Peanut, Tomato, Coriander)</div>
                     </div>
                     <div class="item-price">$14</div>
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Onion Uthappam Combo" data-price="14" data-chutney="full"></div></div>
             </div>
-			<div class="menu-item">
+
+            </div><!-- end sub-section-body Uthappam Combos -->
+            </div><!-- end sub-section Uthappam Combos -->
+
+            <!-- Chapathi -->
+            <div class="sub-section">
+            <div class="sub-section-title" onclick="toggleSubSection(this)">
+                <span>🫓 Chapathi</span>
+                <span class="sub-section-toggle">+</span>
+            </div>
+            <div class="sub-section-body">
+
+            <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Chapathi Combo (Veg)</div>
@@ -955,9 +1110,10 @@
                     </div>
                     <div class="item-price">$14</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Chapathi Combo Veg" data-price="14" data-chutney="full"></div></div>
+                <div class="item-footer"><div class="qty-controls" data-name="Chapathi Combo Veg" data-price="14"></div></div>
             </div>
-			<div class="menu-item">
+
+            <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Chapathi Combo (Veg - Paneer)</div>
@@ -966,10 +1122,10 @@
                     </div>
                     <div class="item-price">$15</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Chapathi Combo Veg (Paneer)" data-price="15" data-chutney="full"></div></div>
+                <div class="item-footer"><div class="qty-controls" data-name="Chapathi Combo Veg (Paneer)" data-price="15"></div></div>
             </div>
 
-			<div class="menu-item">
+            <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Chapathi Combo (Non Veg)</div>
@@ -978,15 +1134,26 @@
                     </div>
                     <div class="item-price">$16</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Chapathi Combo Non Veg" data-price="16" data-chutney="full"></div></div>
-            </div>			
+                <div class="item-footer"><div class="qty-controls" data-name="Chapathi Combo Non Veg" data-price="16"></div></div>
+            </div>
+
+            </div><!-- end sub-section-body Chapathi -->
+            </div><!-- end sub-section Chapathi -->
+
+            <!-- Rice -->
+            <div class="sub-section">
+            <div class="sub-section-title" onclick="toggleSubSection(this)">
+                <span>🍛 Variety Rice Combos</span>
+                <span class="sub-section-toggle">+</span>
+            </div>
+            <div class="sub-section-body">
 
             <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Lemon Rice with Potato Fry</div>
                         <div class="item-description">Rice tempered with lemon extract, peanuts, mustard seeds, and coriander leaves</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$14</div>
                 </div>
@@ -998,7 +1165,7 @@
                     <div>
                         <div class="item-name">Tomato Rice with Potato Fry</div>
                         <div class="item-description">Rice cooked with tomatoes, onions, and garam masala</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$14</div>
                 </div>
@@ -1010,24 +1177,44 @@
                     <div>
                         <div class="item-name">Tamarind Rice with Potato Fry</div>
                         <div class="item-description">Rice tempered with tamarind, mustard seeds and curry leaves</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$15</div>
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Tamarind Rice with Potato Fry" data-price="15"></div></div>
             </div>
+            </div><!-- end sub-section-body Variety Rice -->
+            </div><!-- end sub-section Variety Rice -->
+
+            </div><!-- end section-body -->
         </div>
 
         <!-- Semi Dry -->
         <div class="section">
-            <div class="section-title">🥘 Semi Dry Varieties</div>
+            <div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🥘 Semi Dry Varieties</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 
             <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Chicken Chukka</div>
                         <div class="item-description">Boneless chicken tossed in homestyle Madras masala</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
+                    </div>
+                    <div class="item-price">$18</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Chicken Chukka" data-price="18"></div></div>
+            </div>
+			
+			<div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Cilantro Chicken</div>
+                        <div class="item-description">Tender chicken marinated and cooked in a vibrant fresh cilantro blend with ginger, garlic, green chillies, and a squeeze of lime.</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$18</div>
                 </div>
@@ -1039,24 +1226,29 @@
                     <div>
                         <div class="item-name">Mushroom Chukka</div>
                         <div class="item-description">Mushrooms tossed in homestyle Madras masala</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$18</div>
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Mushroom Chukka" data-price="18"></div></div>
             </div>
+            </div><!-- end section-body -->
         </div>
 
         <!-- Curries -->
         <div class="section">
-            <div class="section-title">🥣 Curries</div>
+            <div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🥣 Curries</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 
             <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Chicken Curry</div>
                         <div class="item-description">Tender chicken in aromatic spiced gravy with coconut paste</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$16</div>
                 </div>
@@ -1068,7 +1260,7 @@
                     <div>
                         <div class="item-name">Mushroom Curry</div>
                         <div class="item-description">Spiced madras style gravy with coconut paste</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$16</div>
                 </div>
@@ -1079,9 +1271,9 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Vegetable Kuruma</div>
+                        <div class="item-name">Vegetable Curry</div>
                         <div class="item-description">Fresh vegetables cooked in onion tomato coconut base</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$16</div>
                 </div>
@@ -1091,9 +1283,9 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Egg Gravy</div>
+                        <div class="item-name">Egg Curry</div>
                         <div class="item-description">Broken eggs simmered in homestyle masala gravy with coconut paste, onions and tomatoes</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$16</div>
                 </div>
@@ -1103,13 +1295,13 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Tomato Kuzhambu</div>
+                        <div class="item-name">Tomato Curry</div>
                         <div class="item-description">Tomatoes and onions simmered in coconut-based gravy</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$16</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Tomato Kuzhambu" data-price="16"></div></div>
+                <div class="item-footer"><div class="qty-controls" data-name="Tomato Curry" data-price="16"></div></div>
             </div>
 
             <div class="menu-item">
@@ -1117,7 +1309,7 @@
                     <div>
                         <div class="item-name">Potato Masala</div>
                         <div class="item-description">Tamil Nadu style spiced potatoes (can be used for making masala dosa)</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$12</div>
                 </div>
@@ -1127,13 +1319,13 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Poondu Kuzhambu</div>
+                        <div class="item-name">Poondu Kuzhambu (Garlic Curry)</div>
                         <div class="item-description">Garlic cooked in tangy spiced tomato and tamarind curry with lentil spice powder</div>
-                        <div class="item-size">12oz</div>
+                        <div class="item-size">16oz</div>
                     </div>
                     <div class="item-price">$16</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Poondu Kuzhambu" data-price="16"></div></div>
+                <div class="item-footer"><div class="qty-controls" data-name="Poondu Kuzhambu (Garlic Curry)" data-price="16"></div></div>
             </div>
 
             <div class="menu-item">
@@ -1141,7 +1333,7 @@
                     <div>
                         <div class="item-name">Sambhar</div>
                         <div class="item-description">Tamil Nadu style spiced lentil curry with vegetables</div>
-                        <div class="item-size">12oz fresh sambhar</div>
+                        <div class="item-size">16oz fresh sambhar</div>
                     </div>
                     <div class="item-price">$12</div>
                 </div>
@@ -1152,17 +1344,22 @@
                     <div>
                         <div class="item-name">Rasam</div>
                         <div class="item-description">Tangy aromatic South Indian spiced soup</div>
-                        <div class="item-size">12oz fresh rasam</div>
+                        <div class="item-size">16oz fresh rasam</div>
                     </div>
-                    <div class="item-price">$12</div>
+                    <div class="item-price">$10</div>
                 </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Rasam" data-price="12"></div></div>
+                <div class="item-footer"><div class="qty-controls" data-name="Rasam" data-price="10"></div></div>
             </div>
+            </div><!-- end section-body -->
         </div>
 
         <!-- Traditional Tamil Nadu Curries -->
         <div class="section">
-            <div class="section-title">🌾 Traditional Tamil Nadu Curries (to be paired with roti/boiled rice) </div>
+            <div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🌾 Traditional Tamil Nadu Curries (to be paired with roti/boiled rice)</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
             <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Choose 8oz ($9) or 16oz ($16) for each curry</p>
 
             <div class="menu-item">
@@ -1306,7 +1503,7 @@
             <div class="menu-item">
                 <div class="item-header">
                     <div>
-                        <div class="item-name">Kathrikkai Rajma Kuzhambu</div>
+                        <div class="item-name">Kathrikkai Rajma Curry</div>
                         <div class="item-description">Indian eggplant and rajma cooked in spiced curry</div>
                     </div>
                 </div>
@@ -1314,14 +1511,14 @@
                     <span class="size-label">8oz</span>
                     <div style="display:flex; align-items:center;">
                         <span class="size-price">$9</span>
-                        <div class="qty-controls" data-name="Kathrikkai Rajma Kuzhambu 8oz" data-price="9"></div>
+                        <div class="qty-controls" data-name="Kathrikkai Rajma Curry 8oz" data-price="9"></div>
                     </div>
                 </div>
                 <div class="size-variant-row">
                     <span class="size-label">16oz</span>
                     <div style="display:flex; align-items:center;">
                         <span class="size-price">$16</span>
-                        <div class="qty-controls" data-name="Kathrikkai Rajma Kuzhambu 16oz" data-price="16"></div>
+                        <div class="qty-controls" data-name="Kathrikkai Rajma Curry 16oz" data-price="16"></div>
                     </div>
                 </div>
             </div>
@@ -1349,11 +1546,16 @@
                 </div>
             </div>
 
+            </div><!-- end section-body -->
         </div>
 
         <!-- Sundal -->
 		<div class="section">
-			<div class="section-title">🌾 Sundal (Boiled and Tempered Legume Salad)</div>
+			<div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🌾 Sundal (Boiled and Tempered Legume Salad)</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 			<p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Traditional Tamil Nadu comfort food - cooked legumes with onions, green chilli and coconut • Choose 8oz ($8) or 16oz ($15)</p>
 
 			<div class="menu-item">
@@ -1447,11 +1649,16 @@
 					</div>
 				</div>
 			</div>
+			</div><!-- end section-body -->
 		</div>
 
         <!-- Poriyal -->
 		<div class="section">
-			<div class="section-title">🥬 Poriyal (Stir-fried Vegetables)</div>
+			<div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🥬 Poriyal (Stir-fried Vegetables)</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 			<p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Stir-fried vegetables with coconut and tadka • Choose 8oz ($9) or 16oz ($16)</p>
 
 			<div class="menu-item">
@@ -1615,11 +1822,17 @@
 					</div>
 				</div>
 			</div>
+			</div><!-- end section-body -->
+		</div>
 
 
         <!-- Chutney -->
 		<div class="section">
-			<div class="section-title">🌿 Chutney Varieties</div>
+			<div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🌿 Chutney Varieties</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 			<p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Fresh ground condiment. Served as a dipping accompaniment to all South Indian meals. Choose 8oz or 16oz</p>
 
 			<div class="menu-item">
@@ -1713,11 +1926,16 @@
 					</div>
 				</div>
 			</div>
+			</div><!-- end section-body -->
 		</div>
 
         <!-- Sides -->
         <div class="section">
-            <div class="section-title">➕ Sides & Add-ons</div>
+            <div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">➕ Sides & Add-ons</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 
             <div class="menu-item">
                 <div class="item-header">
@@ -1751,18 +1969,35 @@
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Masala Vada" data-price="2.50"></div></div>
             </div>
+			
+			<div class="menu-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-name">Boiled Sona Masoori Rice</div>
+                        <div class="item-description">Steamed rice</div>
+                        <div class="item-size">16oz</div>
+                    </div>
+                    <div class="item-price">$6</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Boiled Sona Masoori Rice" data-price="6"></div></div>
+            </div>
+            </div><!-- end section-body -->
         </div>
 
         <!-- Standalone -->
         <div class="section">
-            <div class="section-title">🏠 Standalone Products</div>
+            <div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🏠 Batters — Freshly Home-Ground</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 
             <div class="menu-item">
                 <div class="item-header">
                     <div>
                         <div class="item-name">Idly Dosa Batter</div>
                         <div class="item-description">Make crispy dosas or steamed idlies at home</div>
-                        <div class="item-size">25oz fresh fermented batter | Makes 10-12 dosas</div>
+                        <div class="item-size">32oz fresh fermented batter | Makes 10-12 dosas</div>
                     </div>
                     <div class="item-price">$12</div>
                 </div>
@@ -1771,31 +2006,36 @@
 			<div class="menu-item">
                 <div class="item-header">
                     <div>
+                        <div class="item-name">Adai Dosa Batter (Protein Dosa)</div>
+                        <div class="item-description">A coarsely ground blend of raw rice, chana dal, toor dal, urad dal, and moong dal, spiced with red chillies, ginger and asafoetida — ready to make authentic Tamil Nadu adai dosas.</div>
+                        <div class="item-size">32oz fresh fermented batter | Makes 10-12 dosas</div>
+                    </div>
+                    <div class="item-price">$16</div>
+                </div>
+                <div class="item-footer"><div class="qty-controls" data-name="Adai Dosa Batter (Protein Dosa)" data-price="16"></div></div>
+            </div>
+			<div class="menu-item">
+                <div class="item-header">
+                    <div>
                         <div class="item-name">Medu Vada Batter</div>
                         <div class="item-description">Make crispy fried medu vadas at home</div>
-                        <div class="item-size">25oz fresh batter with onions, green chillies, ginger and pepper</div>
+                        <div class="item-size">32oz fresh batter with onions, green chillies, ginger and pepper</div>
                     </div>
                     <div class="item-price">$21</div>
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Medu Vada Batter" data-price="21"></div></div>
             </div>
 
-            <div class="menu-item">
-                <div class="item-header">
-                    <div>
-                        <div class="item-name">Boiled Sona Masoori Rice</div>
-                        <div class="item-description">Steamed rice</div>
-                        <div class="item-size">12oz</div>
-                    </div>
-                    <div class="item-price">$6</div>
-                </div>
-                <div class="item-footer"><div class="qty-controls" data-name="Boiled Sona Masoori Rice" data-price="6"></div></div>
-            </div>
+            </div><!-- end section-body -->
         </div>
 
         <!-- Desserts -->
         <div class="section">
-            <div class="section-title">🍮 Desserts</div>
+            <div class="section-title" onclick="toggleSection(this)">
+                <span class="section-title-left">🍮 Desserts</span>
+                <span class="section-toggle">+</span>
+            </div>
+            <div class="section-body">
 
             <div class="menu-item">
                 <div class="item-header">
@@ -1844,13 +2084,14 @@
                 </div>
                 <div class="item-footer"><div class="qty-controls" data-name="Paruppu Payasam" data-price="7"></div></div>
             </div>
+            </div><!-- end section-body -->
         </div>
     </div>
 
     <div class="footer">
         <p style="font-size: 1.1rem; margin-bottom: 1rem;">🍲 Ooru Masala - Bringing Chennai to Vancouver 🍲</p>
         <p>✨ All items fresh, homemade daily.</p>
-        <p>📦 Takeaway only | Pre-orders required (2 days minimum)</p>
+        <p>📦 Takeaway only | Pre-orders required (1 day minimum)</p>
         <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
             🥘 Authentic South Indian cuisine from Tamil Nadu 🥘
         </p>
@@ -1912,7 +2153,7 @@
         </div>
 
         <!-- Customer & pickup summary box (shown in both screen and print) -->
-        <div id="pickupSummaryBox" style="display:block; background:#faf5ff; border:2px solid #e9d5ff; border-radius:12px; padding:1rem 1.3rem; margin-bottom:1.5rem;">
+        <div id="pickupSummaryBox" style="display:none; background:#faf5ff; border:2px solid #e9d5ff; border-radius:12px; padding:1rem 1.3rem; margin-bottom:1.5rem;">
             <div style="font-weight:800; color:#7c3aed; font-size:1rem; margin-bottom:0.6rem;">📋 Order Details</div>
             <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
                 <tr>
@@ -1987,7 +2228,7 @@
                 <label class="name-label">📅 Pickup Date <span style="color:#dc2626;">*</span></label>
                 <input type="date" id="pickupDate" class="name-input"
                     onchange="updatePickupDetails()" />
-                <div class="pickup-error-msg" id="dateErr">⚠️ Please select a pickup date (minimum 2 days from today).</div>
+                <div class="pickup-error-msg" id="dateErr">⚠️ Please select a pickup date (minimum 1 day from today).</div>
             </div>
             <div>
                 <label class="name-label">🕓 Pickup Time <span style="color:#dc2626;">*</span></label>
@@ -2001,20 +2242,6 @@
                 <div class="pickup-error-msg" id="timeErr">⚠️ Please select a pickup time.</div>
         </div>
     </div>
-
-</div>
-	
-	<!-- PICKUP DETAILS VIEW -->
-<div class="print-view" id="pickupView">
-    <div class="print-actions no-print">
-        <button class="btn-back" onclick="closeOrderSummaryView()">← Back</button>
-        <button class="btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
-    </div>
-    <div class="print-instructions no-print">
-        📱 <strong>To order:</strong> Fill in your details and click "Print / Save PDF". Send the PDF via WhatsApp or Facebook Messenger.
-    </div>
-
-    
 
     <div class="print-header">
         <h1>🍲 Ooru Masala Home</h1>
@@ -2032,17 +2259,19 @@
         </table>
     </div>
 
-    <!-- Repeat the print table here for the PDF -->
     <table class="print-table">
         <thead><tr><th>Item</th><th style="text-align:center;">Qty</th><th style="text-align:right;">Price</th><th style="text-align:right;">Subtotal</th></tr></thead>
         <tbody id="printTableBody2"></tbody>
         <tfoot><tr class="print-total-row"><td colspan="3">Order Total</td><td id="printTotal2"></td></tr></tfoot>
     </table>
     <div class="print-footer">
-        <p><strong>Pre-orders only · Minimum 2 days notice required</strong></p>
+        <p><strong>Pre-orders only · Minimum 1/2 days notice required</strong></p>
         <p style="margin-top:0.4rem; color:#999;">Prices in CAD · Menu updated May 2026</p>
     </div>
+
 </div>
+	
+
 
     <script>
         // ── Chutney options per type ────────────────────────────
@@ -2247,8 +2476,11 @@
 				document.getElementById(id).classList.remove('field-error'));
 
 			// Set minimum date
-			const minDate = new Date();
-			minDate.setDate(minDate.getDate() + 2);
+			// Get "today" in Vancouver time, regardless of visitor's device timezone
+			const vancouverDateStr = new Date().toLocaleString('en-US', { timeZone: 'America/Vancouver' });
+			const minDate = new Date(vancouverDateStr);
+			minDate.setHours(0, 0, 0, 0);
+			minDate.setDate(minDate.getDate() + 1);
 			document.getElementById('pickupDate').min = minDate.toISOString().split('T')[0];
 
 			document.getElementById('printView').classList.remove('open');
@@ -2292,8 +2524,11 @@
 		['pickupName','pickupPhone','pickupDate','pickupTime'].forEach(id =>
 			document.getElementById(id).classList.remove('field-error'));
 
-		const minDate = new Date();
-		minDate.setDate(minDate.getDate() + 2);
+		// Get "today" in Vancouver time, regardless of visitor's device timezone
+		const vancouverDateStr = new Date().toLocaleString('en-US', { timeZone: 'America/Vancouver' });
+		const minDate = new Date(vancouverDateStr);
+		minDate.setHours(0, 0, 0, 0);
+		minDate.setDate(minDate.getDate() + 1);
 		document.getElementById('pickupDate').min = minDate.toISOString().split('T')[0];
 
 		closeCart();
@@ -2307,83 +2542,110 @@
 		openCart();
 	}
 	function openOrderSummaryView() {
-		const name  = document.getElementById('pickupName').value.trim();
-		const phone = document.getElementById('pickupPhone').value.trim();
-		const date  = document.getElementById('pickupDate').value;
-		const time  = document.getElementById('pickupTime').value;
-		const minDate = new Date();
-		minDate.setDate(minDate.getDate() + 2);
-		const selectedDate = date ? new Date(date + 'T00:00:00') : null;
-
-		let valid = true;
-		function setErr(fieldId, errId, show) {
-			document.getElementById(errId).classList.toggle('visible', show);
-			document.getElementById(fieldId).classList.toggle('field-error', show);
-			if (show) valid = false;
-		}
-		setErr('pickupName',  'nameErr',  !name);
-		setErr('pickupPhone', 'phoneErr', !phone);
-		setErr('pickupDate',  'dateErr',  !date || selectedDate < minDate);
-		setErr('pickupTime',  'timeErr',  !time);
-
-		if (!valid) {
-			document.getElementById('pickupDetailsForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
-			return;
-		}
-
-		// Populate summary box
-		document.getElementById('summaryName').textContent  = name;
-		document.getElementById('summaryPhone').textContent = phone;
-		const d = new Date(date + 'T00:00:00');
-		document.getElementById('summaryDate').textContent =
-			d.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-		document.getElementById('summaryTime').textContent = time;
-		document.getElementById('pickupSummaryBox').style.display = 'block';
-
-		// Populate order table
-		const now = new Date();
-		document.getElementById('printDate').textContent =
-			'Order placed: ' + now.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-
-		let total = 0, rows = '';
-		Object.entries(cart).forEach(([itemName, { qty, price, chutney }]) => {
-			const sub = qty * price;
-			total += sub;
-			const detail = chutney
-				? `<br><span style="font-size:0.82rem;color:#7c3aed;font-style:italic;">🌿 ${chutney} Chutney</span>`
-				: '';
-			rows += `<tr>
-				<td>${itemName}${detail}</td>
-				<td style="text-align:center;">${qty}</td>
-				<td style="text-align:right;">$${price % 1 === 0 ? price : price.toFixed(2)}</td>
-				<td>$${sub % 1 === 0 ? sub : sub.toFixed(2)}</td>
-			</tr>`;
-		});
-		// Mirror to pickupView (used for printing)
-		document.getElementById('printTableBody2').innerHTML = rows;
-		document.getElementById('printTotal2').textContent =
-			'$' + (total % 1 === 0 ? total : total.toFixed(2));
-		document.getElementById('printDate2').textContent =
-			document.getElementById('printDate').textContent;
-		document.getElementById('summaryName2').textContent  = name;
-		document.getElementById('summaryPhone2').textContent = phone;
-		document.getElementById('summaryDate2').textContent  = document.getElementById('summaryDate').textContent;
-		document.getElementById('summaryTime2').textContent  = time;
-		document.getElementById('pickupSummaryBox2').style.display = 'block';
-		
-		document.getElementById('printTableBody').innerHTML = rows;
-		document.getElementById('printTotal').textContent =
-			'$' + (total % 1 === 0 ? total : total.toFixed(2));
-
-		document.getElementById('pickupView').classList.remove('open');
-		document.getElementById('printView').classList.add('open');
-		document.getElementById('printView').scrollTop = 0;
+			const name  = document.getElementById('pickupName').value.trim();
+			const phone = document.getElementById('pickupPhone').value.trim();
+			const date  = document.getElementById('pickupDate').value;
+			const time  = document.getElementById('pickupTime').value;
+			// Get "today" in Vancouver time, regardless of visitor's device timezone
+			const vancouverDateStr = new Date().toLocaleString('en-US', { timeZone: 'America/Vancouver' });
+			const minDate = new Date(vancouverDateStr);
+			minDate.setHours(0, 0, 0, 0);
+			minDate.setDate(minDate.getDate() + 1);
+			const selectedDate = date ? new Date(date + 'T00:00:00') : null;
+			let valid = true;
+			function setErr(fieldId, errId, show) {
+				document.getElementById(errId).classList.toggle('visible', show);
+				document.getElementById(fieldId).classList.toggle('field-error', show);
+				if (show) valid = false;
+			}
+			setErr('pickupName',  'nameErr',  !name);
+			setErr('pickupPhone', 'phoneErr', !phone);
+			setErr('pickupDate',  'dateErr',  !date || selectedDate < minDate);
+			setErr('pickupTime',  'timeErr',  !time);
+			if (!valid) {
+				document.getElementById('pickupDetailsForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+				return;
+			}
+			// Populate summary box
+			document.getElementById('summaryName').textContent  = name;
+			document.getElementById('summaryPhone').textContent = phone;
+			const d = new Date(date + 'T00:00:00');
+			document.getElementById('summaryDate').textContent =
+				d.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+			document.getElementById('summaryTime').textContent = time;
+			document.getElementById('pickupSummaryBox').style.display = 'block';
+			// Populate order table
+			const now = new Date();
+			document.getElementById('printDate').textContent =
+				'Order placed: ' + now.toLocaleDateString('en-CA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+			let total = 0, rows = '';
+			Object.entries(cart).forEach(([itemName, { qty, price, chutney }]) => {
+				const sub = qty * price;
+				total += sub;
+				const detail = chutney
+					? `<br><span style="font-size:0.82rem;color:#7c3aed;font-style:italic;">🌿 ${chutney} Chutney</span>`
+					: '';
+				rows += `<tr>
+					<td>${itemName}${detail}</td>
+					<td style="text-align:center;">${qty}</td>
+					<td style="text-align:right;">$${price % 1 === 0 ? price : price.toFixed(2)}</td>
+					<td>$${sub % 1 === 0 ? sub : sub.toFixed(2)}</td>
+				</tr>`;
+			});
+			document.getElementById('printTableBody').innerHTML = rows;
+			document.getElementById('printTotal').textContent =
+				'$' + (total % 1 === 0 ? total : total.toFixed(2));
+			// Mirror to pickupView (used for printing)
+			document.getElementById('printTableBody2').innerHTML = rows;
+			document.getElementById('printTotal2').textContent =
+				'$' + (total % 1 === 0 ? total : total.toFixed(2));
+			document.getElementById('printDate2').textContent =
+				document.getElementById('printDate').textContent;
+			document.getElementById('summaryName2').textContent  = name;
+			document.getElementById('summaryPhone2').textContent = phone;
+			document.getElementById('summaryDate2').textContent  = document.getElementById('summaryDate').textContent;
+			document.getElementById('summaryTime2').textContent  = time;
+			document.getElementById('pickupSummaryBox2').style.display = 'block';
+			document.getElementById('pickupView').classList.remove('open');
+			document.getElementById('printView').classList.add('open');
+			document.getElementById('printView').scrollTop = 0;
 	}
+
+
 	function closeOrderSummaryView() {
 		document.getElementById('printView').classList.remove('open');
 		document.getElementById('pickupView').classList.add('open');
 		document.getElementById('pickupView').scrollTop = 0;
 	}
+
+    function toggleSection(titleEl) {
+        const section = titleEl.closest('.section');
+        const body = section.querySelector('.section-body');
+        const toggle = titleEl.querySelector('.section-toggle');
+        const isOpen = body.classList.contains('open');
+        if (isOpen) {
+            body.classList.remove('open');
+            toggle.textContent = '+';
+        } else {
+            body.classList.add('open');
+            toggle.textContent = '−';
+        }
+    }
+
+    function toggleSubSection(titleEl) {
+        const subSection = titleEl.closest('.sub-section');
+        const body = subSection.querySelector('.sub-section-body');
+        const toggle = titleEl.querySelector('.sub-section-toggle');
+        const isOpen = body.classList.contains('open');
+        if (isOpen) {
+            body.classList.remove('open');
+            toggle.textContent = '+';
+        } else {
+            body.classList.add('open');
+            toggle.textContent = '−';
+        }
+    }
+	
     </script>
 </body>
 </html>
